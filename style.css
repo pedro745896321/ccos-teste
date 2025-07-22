@@ -1,0 +1,526 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('https://s1.1zoom.me/b3742/769/Cats_Black_Black_511583_1920x1080.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    color: white;
+    text-align: center;
+    padding: 50px;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    color: black;
+    transition: background-color 0.5s, color 0.5s;
+    position: relative; /* Para posicionar o botão de fechar */
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: #aaa;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: white;
+    transition: color 0.5s;
+}
+
+/* Novo estilo para h3, incluindo o do OCR */
+h3 {
+    font-size: 26px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: white; /* Cor padrão */
+    transition: color 0.5s;
+}
+
+
+textarea {
+    width: 90%;
+    height: 300px;
+    font-size: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+    transition: background-color 0.5s, color 0.5s, border-color 0.5s;
+}
+
+button,
+select,
+input[type="file"] {
+    padding: 15px 30px;
+    font-size: 20px;
+    margin: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.5s, color 0.5;
+}
+
+input[type="file"] {
+    color: black;
+    background-color: #f0f0f0;
+}
+
+button {
+    background: gold;
+    color: black;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #9e943e;
+}
+
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 1001;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: none;
+}
+
+.notification.show {
+    opacity: 1;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5px;
+    background: white;
+    color: black;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+th,
+td {
+    border: 2px solid black;
+    padding: 20px;
+    text-align: center;
+    font-size: 22px;
+    transition: border-color 0.5s, color 0.5s;
+}
+
+/* Estilos para CPF inválido */
+td.cpf-invalido {
+    background-color: red;
+    color: white;
+}
+
+input[type="checkbox"] {
+    width: 30px;
+    height: 30px;
+    transform: scale(1.5);
+    margin: 10px;
+    cursor: pointer;
+}
+
+.logo {
+    width: 600px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.email-rapido {
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    color: white;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+input[type="text"] {
+    padding: 10px;
+    margin: 10px 0;
+    width: calc(100% - 22px);
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.riscado {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.desativado {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* --- Modo Noturno --- */
+body.dark-mode {
+    background-color: #222;
+    color: #eee;
+    /* Removida a redefinição de background-image, já que a opacidade é usada para escurecer */
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+body.dark-mode::before {
+    opacity: 0.08;
+}
+
+body.dark-mode .modal-content {
+    background-color: #333;
+    color: #eee;
+    border-color: #555;
+}
+
+body.dark-mode .close:hover,
+body.dark-mode .close:focus {
+    color: #eee;
+}
+
+body.dark-mode h2 {
+    color: #eee;
+}
+
+body.dark-mode h3 { /* Estilo para h3 no modo noturno */
+    color: #eee;
+}
+
+body.dark-mode textarea {
+    background-color: #444;
+    color: #eee;
+    border-color: #666;
+}
+
+body.dark-mode button,
+body.dark-mode select,
+body.dark-mode input[type="file"] {
+    background-color: #333b4f;
+    color: #eee;
+    border: 1px solid #777;
+}
+
+body.dark-mode button:hover {
+    background: #666;
+}
+
+body.dark-mode input[type="file"] {
+    background-color: #555;
+    color: #eee;
+}
+
+body.dark-mode table {
+    background: #333;
+    color: #eee;
+    border: 2px solid #555;
+}
+
+body.dark-mode th,
+body.dark-mode td {
+    border: 2px solid #555;
+    color: #eee;
+}
+
+/* Estilos para CPF inválido no modo noturno */
+body.dark-mode td.cpf-invalido {
+    background-color: darkred; /* Cor um pouco mais escura para combinar */
+    color: white;
+}
+
+body.dark-mode .email-rapido {
+    background: rgba(0, 0, 0, 0.9);
+    color: #eee;
+}
+
+body.dark-mode input[type="text"] {
+    background-color: #444;
+    color: #eee;
+}
+
+body.dark-mode .notification {
+    background-color: #3a3a3a;
+    color: #fff;
+}
+
+/* Botão de Toggle do Modo Noturno */
+#dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 1000;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#dark-mode-toggle:hover {
+    background-color: #333b4f;
+}
+
+/* Loading Spinner */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #fdd835; /* Cor do spinner */
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    display: none; /* Inicia escondido */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Estilos para a área da câmera */
+#camera-feed {
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    border: 1px solid #ccc;
+    margin-top: 10px;
+    background-color: black;
+}
+
+#camera-controls {
+    margin-top: 10px;
+}
+
+#photo-canvas {
+    display: none; /* Oculta o canvas inicialmente */
+}
+
+/* --- NOVOS ESTILOS PARA A ÁREA DE EXIBIÇÃO DO OCR --- */
+.ocr-section {
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 25px; /* Espaço do elemento acima */
+    margin-bottom: 25px; /* Espaço do elemento abaixo */
+    text-align: left; /* Alinha o texto à esquerda */
+    transition: background-color 0.5s;
+}
+
+.ocr-section h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: gold; /* Destaque para o título */
+}
+
+.ocr-text-output {
+    background-color: #222; /* Fundo escuro para o texto */
+    color: #aaffaa; /* Texto verde claro para legibilidade */
+    padding: 15px;
+    border-radius: 8px;
+    font-family: 'Courier New', Courier, monospace; /* Fonte monoespaçada */
+    white-space: pre-wrap; /* Mantém a formatação do texto (quebras de linha, espaços) */
+    word-wrap: break-word; /* Quebra palavras longas se necessário */
+    min-height: 80px; /* Altura mínima */
+    overflow-y: auto; /* Adiciona scroll se o texto for muito longo */
+    border: 1px solid #555;
+    margin-bottom: 15px;
+}
+
+body.dark-mode .ocr-section {
+    background-color: rgba(0, 0, 0, 0.85); /* Fundo mais escuro no modo noturno */
+}
+
+body.dark-mode .ocr-text-output {
+    background-color: #333;
+    color: #90ee90; /* Um verde um pouco diferente no modo noturno */
+    border-color: #777;
+}
+
+
+/* RESPONSIVIDADE PARA CELULARES E TABLETS */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .logo {
+        width: 90%;
+        max-width: 250px;
+    }
+
+    h2 {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    h3 { /* Responsividade para h3 */
+        font-size: 20px;
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    textarea {
+        width: 100%;
+        height: 180px;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    button,
+    select,
+    input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        margin: 8px 0;
+    }
+
+    input[type="text"] {
+        width: 100% !important;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    table,
+    th,
+    td {
+        font-size: 14px;
+        padding: 8px;
+        word-break: break-word;
+    }
+
+    input[type="checkbox"] {
+        transform: scale(1.2);
+        margin: 5px;
+    }
+
+    .info-button {
+        top: 10px;
+        right: 10px;
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .email-rapido {
+        padding: 10px;
+    }
+
+    .botoes-rapidos {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .botoes-rapidos select,
+    .botoes-rapidos button {
+        width: 100%;
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    pre#output-lista,
+    pre#email-gerado {
+        font-size: 13px;
+        white-space: pre-wrap;
+    }
+
+    .modal-content {
+        width: 95%;
+        font-size: 14px;
+    }
+
+    #dark-mode-toggle {
+        top: 10px;
+        right: 10px;
+        padding: 6px;
+        font-size: 20px;
+        width: 36px;
+        height: 36px;
+    }
+
+    /* Responsividade para a área de OCR */
+    .ocr-section {
+        padding: 15px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    .ocr-text-output {
+        min-height: 60px; /* Altura mínima responsiva */
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+.pular {
+    animation: bounce 0.5s ease;
+}
