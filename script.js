@@ -82,9 +82,6 @@ function takePhoto() {
     photoCanvas.toBlob((blob) => {
         photoTakenBlob = blob;
     }, 'image/jpeg', 0.95); // Qualidade da imagem
-
-    // AQUI É A MUDANÇA: usePhoto() NÃO é mais chamado automaticamente.
-    // O usuário deverá clicar no botão "Usar Foto" para enviar ao OCR.
 }
 
 function retryPhoto() {
@@ -305,7 +302,7 @@ function transferirParaInput() {
 }
 
 
-// --- FUNÇÕES DE LÓGICA E MANIPULAÇÃO DA TABELA (Originais mantidas e aprimoradas) ---
+// --- FUNÇÕES DE LÓGICA E MANIPULAÇÃO DA TABELA ---
 
 function updateNomeCount() {
     const totalNomes = document.querySelectorAll("#tabela-gerada tr").length;
@@ -514,62 +511,71 @@ function showNotification(message, isError) {
 // --- INTEGRAÇÃO COM OCR.space ---
 async function enviarImagemOCR() {
     const inputFile = document.getElementById("imagem-upload");
-    if (inputFile.files.length === 0) {
-        showNotification("Por favor, selecione uma imagem para enviar.", true);
+    const files = inputFile.files; // Obtenha todos os arquivos selecionados
+
+    if (files.length === 0) {
+        showNotification("Por favor, selecione uma ou mais imagens para enviar.", true);
         return;
     }
 
-    let arquivo = inputFile.files[0];
     const ocrSpinner = document.getElementById('ocr-spinner');
     const extractButton = document.querySelector('button[onclick="enviarImagemOCR()"]');
 
     extractButton.disabled = true;
     ocrSpinner.style.display = 'inline-block';
-    showNotification("Enviando imagem para OCR...", false);
+    document.getElementById("display-ocr-text").textContent = "Processando imagens..."; // Limpa a área de texto anterior
+    document.getElementById("ocr-display-area").style.display = 'block';
 
-    // Verifica o tamanho do arquivo e redimensiona se for maior que 1MB
-    if (arquivo.size > 1024 * 1024) { // 1MB em bytes
-        showNotification("Redimensionando imagem para envio...", false);
-        arquivo = await resizeImage(arquivo, 1200, 1200, 0.8);
-        if (!arquivo) {
-            showNotification("Falha ao redimensionar a imagem.", true);
-            extractButton.disabled = false;
-            ocrSpinner.style.display = 'none';
-            return;
+    let allExtractedText = []; // Array para armazenar o texto de todas as imagens
+
+    for (let i = 0; i < files.length; i++) {
+        let arquivo = files[i];
+        showNotification(`Processando imagem ${i + 1} de ${files.length}...`, false);
+
+        // Verifica o tamanho do arquivo e redimensiona se for maior que 1MB
+        if (arquivo.size > 1024 * 1024) { // 1MB em bytes
+            showNotification(`Redimensionando imagem ${arquivo.name} para envio...`, false);
+            arquivo = await resizeImage(arquivo, 1200, 1200, 0.8);
+            if (!arquivo) {
+                showNotification(`Falha ao redimensionar a imagem ${arquivo.name}.`, true);
+                allExtractedText.push(`--- ERRO NA IMAGEM ${i + 1} (Falha ao redimensionar) ---`);
+                continue; // Pula para a próxima imagem
+            }
+        }
+
+        const formData = new FormData();
+        formData.append("apikey", "K89510033988957");
+        formData.append("language", "por");
+        formData.append("file", arquivo, `uploaded_image_${i}.jpg`); // Adicione um nome de arquivo único
+        formData.append("OCREngine", "2");
+
+        try {
+            const resposta = await fetch("https://api.ocr.space/parse/image", {
+                method: "POST",
+                body: formData,
+            });
+            const dados = await resposta.json();
+
+            if (dados.IsErroredOnProcessing || !dados.ParsedResults || dados.ParsedResults.length === 0) {
+                const errorMessage = dados.ErrorMessage ? dados.ErrorMessage.join(". ") : "Ocorreu um erro desconhecido no OCR.";
+                showNotification(`Erro ao processar a imagem ${arquivo.name}: ` + errorMessage, true);
+                allExtractedText.push(`--- ERRO NA IMAGEM ${i + 1} (${arquivo.name}) ---`);
+            } else {
+                const textoExtraido = dados.ParsedResults[0].ParsedText;
+                allExtractedText.push(`--- TEXTO DA IMAGEM ${i + 1} (${arquivo.name}) ---\n${textoExtraido.trim()}`);
+            }
+
+        } catch (erro) {
+            console.error(`Falha na requisição OCR para imagem ${arquivo.name}:`, erro);
+            showNotification(`Falha na requisição OCR para imagem ${arquivo.name}: ` + erro.message, true);
+            allExtractedText.push(`--- ERRO NA IMAGEM ${i + 1} (${arquivo.name}): ${erro.message} ---`);
         }
     }
 
-    const formData = new FormData();
-    formData.append("apikey", "K89510033988957");
-    formData.append("language", "por");
-    formData.append("file", arquivo, "uploaded_image.jpg"); // Adicione o nome do arquivo com a extensão
-    formData.append("OCREngine", "2");
-
-    try {
-        const resposta = await fetch("https://api.ocr.space/parse/image", {
-            method: "POST",
-            body: formData,
-        });
-        const dados = await resposta.json();
-
-        if (dados.IsErroredOnProcessing || !dados.ParsedResults || dados.ParsedResults.length === 0) {
-            const errorMessage = dados.ErrorMessage ? dados.ErrorMessage.join(". ") : "Ocorreu um erro desconhecido no OCR.";
-            showNotification("Erro ao processar a imagem: " + errorMessage, true);
-            return;
-        }
-
-        const textoExtraido = dados.ParsedResults[0].ParsedText;
-        document.getElementById("display-ocr-text").textContent = textoExtraido;
-        document.getElementById("ocr-display-area").style.display = 'block';
-        showNotification("Texto extraído com sucesso!", false);
-
-    } catch (erro) {
-        console.error("Falha na requisição OCR:", erro);
-        showNotification("Falha na requisição OCR: " + erro.message, true);
-    } finally {
-        extractButton.disabled = false;
-        ocrSpinner.style.display = 'none';
-    }
+    document.getElementById("display-ocr-text").textContent = allExtractedText.join("\n\n"); // Concatena todo o texto
+    showNotification("Processamento de todas as imagens concluído!", false);
+    extractButton.disabled = false;
+    ocrSpinner.style.display = 'none';
 }
 
 // --- EVENTOS DA TABELA ---
