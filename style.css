@@ -1,6 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Roboto', sans-serif; /* Fonte mais moderna e limpa */
+    background-color: #e9eff5; /* Fundo mais suave e claro */
     color: #333;
     margin: 0;
     padding: 20px;
@@ -12,170 +12,186 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
+/* Importar fonte Roboto do Google Fonts (adicione ao seu HTML no <head>):
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+*/
+
 /* Dark Mode Styles */
 body.dark-mode {
-    background-color: #1a1a1a;
-    color: #f4f4f4;
+    background-color: #282c34; /* Fundo escuro mais suave */
+    color: #e0e0e0; /* Texto mais claro */
 }
 
 .container {
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px; /* Bordas mais arredondadas */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada e suave */
     width: 100%;
     max-width: 900px;
-    margin-bottom: 20px; /* Adicionado espaço para o botão de modo noturno */
+    margin-bottom: 20px;
     box-sizing: border-box;
 }
 
 body.dark-mode .container {
-    background-color: #2c2c2c;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background-color: #3b4252; /* Fundo do container no dark mode */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); /* Sombra mais escura para o dark mode */
 }
 
 .logo {
     max-width: 180px;
     display: block;
-    margin: 0 auto 30px auto;
+    margin: 0 auto 35px auto; /* Aumenta um pouco o espaçamento inferior do logo */
 }
 
 h2, h3 {
-    color: #0056b3;
+    color: #007bff; /* Azul primário */
     text-align: center;
-    margin-top: 25px;
-    margin-bottom: 15px;
+    margin-top: 30px; /* Aumenta o espaçamento superior */
+    margin-bottom: 20px; /* Aumenta o espaçamento inferior */
+    font-weight: 500; /* Levemente mais fino para um visual mais moderno */
 }
 
 body.dark-mode h2,
 body.dark-mode h3 {
-    color: #87ceeb; /* Light blue for dark mode headings */
+    color: #61dafb; /* Azul ciano para dark mode, mais vivo */
 }
 
 button {
     background-color: #007bff;
     color: white;
-    padding: 12px 20px;
+    padding: 12px 22px; /* Aumenta um pouco o padding horizontal */
     border: none;
-    border-radius: 8px;
+    border-radius: 10px; /* Bordas mais arredondadas */
     cursor: pointer;
     font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Adiciona transição para sombra */
+    margin: 6px; /* Ajusta a margem */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra mais suave */
 }
 
 button:hover {
     background-color: #0056b3;
-    transform: translateY(-2px);
+    transform: translateY(-3px); /* Movimento mais pronunciado no hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Sombra maior no hover */
 }
 
 button:active {
     background-color: #004085;
     transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra menor no active */
 }
 
 button:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
+    box-shadow: none; /* Remove sombra quando desativado */
 }
 
 body.dark-mode button {
-    background-color: #6a0dad; /* Purple for dark mode buttons */
+    background-color: #8a2be2; /* Roxo para dark mode */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 body.dark-mode button:hover {
-    background-color: #4b0082; /* Darker purple on hover */
+    background-color: #6a0dad; /* Roxo mais escuro no hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
 body.dark-mode button:active {
-    background-color: #330055;
+    background-color: #550080;
 }
 
 input[type="file"] {
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+    margin: 12px 0; /* Ajusta a margem */
+    padding: 12px; /* Aumenta o padding */
+    border: 1px solid #c0c0c0; /* Borda mais suave */
+    border-radius: 10px; /* Bordas mais arredondadas */
+    background-color: #ffffff;
     color: #333;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Sombra interna sutil */
 }
 
 body.dark-mode input[type="file"] {
-    background-color: #3a3a3a;
-    border-color: #555;
-    color: #f4f4f4;
+    background-color: #4a4a4a;
+    border-color: #666;
+    color: #e0e0e0;
 }
 
 textarea {
-    width: calc(100% - 20px);
-    padding: 15px;
-    margin: 15px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    min-height: 150px;
+    width: calc(100% - 24px); /* Ajusta a largura para o novo padding */
+    padding: 18px; /* Aumenta o padding */
+    margin: 18px 0; /* Ajusta a margem */
+    border: 1px solid #c0c0c0; /* Borda mais suave */
+    border-radius: 10px; /* Bordas mais arredondadas */
+    font-size: 17px; /* Aumenta levemente a fonte */
+    min-height: 180px; /* Aumenta a altura mínima */
     resize: vertical;
     box-sizing: border-box;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     color: #333;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Sombra interna sutil */
 }
 
 body.dark-mode textarea {
-    background-color: #3a3a3a;
-    border-color: #555;
-    color: #f4f4f4;
-}
-
-.ocr-section {
-    background-color: #e9ecef;
-    padding: 20px;
-    border-radius: 8px;
-    margin-top: 20px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-}
-
-body.dark-mode .ocr-section {
-    background-color: #3d3d3d;
-    color: #f4f4f4;
-    box-shadow: inset 0 1px 3px rgba(255,255,255,0.05);
-}
-
-.ocr-text-output {
-    white-space: pre-wrap; /* Preserves whitespace and wraps text */
-    word-wrap: break-word; /* Breaks long words */
-    max-height: 300px;
-    overflow-y: auto;
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 6px;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 15px;
-    color: #222;
-    margin-bottom: 15px;
-}
-
-body.dark-mode .ocr-text-output {
     background-color: #4a4a4a;
     border-color: #666;
-    color: #f4f4f4;
+    color: #e0e0e0;
+}
+
+.ocr-section, .email-rapido { /* Agrupado para consistência */
+    background-color: #f7f9fc; /* Fundo mais claro */
+    padding: 25px; /* Aumenta o padding */
+    border-radius: 12px; /* Bordas mais arredondadas */
+    margin-top: 25px; /* Aumenta a margem superior */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Sombra mais presente */
+}
+
+body.dark-mode .ocr-section,
+body.dark-mode .email-rapido {
+    background-color: #3b4252;
+    color: #e0e0e0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.ocr-text-output, .email-rapido pre { /* Agrupado para consistência */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-height: 350px; /* Aumenta a altura máxima */
+    overflow-y: auto;
+    background-color: #f0f4f7; /* Fundo mais claro */
+    border: 1px solid #d0d0d0; /* Borda mais suave */
+    padding: 15px; /* Aumenta o padding */
+    border-radius: 8px; /* Bordas mais arredondadas */
+    font-family: 'Roboto Mono', monospace; /* Fonte monoespaçada mais moderna */
+    font-size: 15px;
+    color: #222;
+    margin-bottom: 20px; /* Aumenta a margem inferior */
+}
+
+body.dark-mode .ocr-text-output,
+body.dark-mode .email-rapido pre {
+    background-color: #4a4a4a;
+    border-color: #666;
+    color: #e0e0e0;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin: 25px 0; /* Aumenta a margem */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
+    border-radius: 10px; /* Bordas arredondadas na tabela inteira */
+    overflow: hidden; /* Garante que as bordas arredondadas sejam visíveis */
 }
 
 body.dark-mode table {
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
+    border: 1px solid #e0e0e0; /* Bordas mais claras */
+    padding: 14px; /* Aumenta o padding */
     text-align: left;
     vertical-align: top;
 }
@@ -183,54 +199,57 @@ th, td {
 th {
     background-color: #007bff;
     color: white;
-    font-weight: bold;
+    font-weight: 600; /* Levemente mais encorpado */
 }
 
 body.dark-mode th {
-    background-color: #6a0dad;
+    background-color: #8a2be2;
 }
 
 tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #f7f9fc; /* Fundo mais suave para linhas pares */
 }
 
 body.dark-mode tr:nth-child(even) {
-    background-color: #3a3a3a;
+    background-color: #3b4252;
 }
 
 tr:hover {
-    background-color: #e6e6e6;
+    background-color: #e0f0ff; /* Azul claro sutil no hover */
 }
 
 body.dark-mode tr:hover {
-    background-color: #4a4a4a;
+    background-color: #4b5263; /* Cor mais escura para dark mode hover */
 }
 
 /* Estilo para CPF inválido */
 .cpf-invalido {
-    color: red;
+    color: #dc3545; /* Vermelho mais padrão */
     font-weight: bold;
 }
 
 body.dark-mode .cpf-invalido {
-    color: #ff6b6b; /* Lighter red for dark mode */
+    color: #ff7b7b; /* Vermelho mais claro para dark mode */
 }
 
 /* Estilo para itens marcados como "feito" */
 td.riscado {
     text-decoration: line-through;
     color: #888;
+    opacity: 0.7; /* Suaviza um pouco mais */
 }
 
 td button.riscado {
-    background-color: #888; /* Cor mais neutra para o botão riscado */
+    background-color: #a0a0a0; /* Cor mais suave para o botão riscado */
     text-decoration: line-through;
-    cursor: default; /* Remove o cursor de link/botão */
+    cursor: default;
+    box-shadow: none; /* Remove sombra */
 }
 
 td button.desativado:hover {
-    background-color: #888; /* Mantém a cor no hover para desativado */
-    transform: none; /* Remove a animação no hover para desativado */
+    background-color: #a0a0a0;
+    transform: none;
+    box-shadow: none;
 }
 
 /* Spinner Styles */
@@ -238,17 +257,17 @@ td button.desativado:hover {
     border: 4px solid rgba(0, 0, 0, 0.1);
     border-left-color: #007bff;
     border-radius: 50%;
-    width: 16px;
-    height: 16px;
+    width: 18px; /* Aumenta levemente */
+    height: 18px; /* Aumenta levemente */
     animation: spin 1s linear infinite;
     display: inline-block;
     vertical-align: middle;
-    margin-left: 8px;
-    display: none; /* Hidden by default */
+    margin-left: 10px; /* Aumenta a margem */
+    display: none;
 }
 
 body.dark-mode .spinner {
-    border-left-color: #6a0dad;
+    border-left-color: #61dafb; /* Cor do spinner no dark mode */
 }
 
 @keyframes spin {
@@ -258,14 +277,14 @@ body.dark-mode .spinner {
 /* Notification styles */
 .notification {
     position: fixed;
-    bottom: 20px;
+    bottom: 25px; /* Ajusta a posição */
     left: 50%;
     transform: translateX(-50%);
-    background-color: #4CAF50; /* Green */
+    background-color: #28a745; /* Verde mais padrão */
     color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 12px 25px; /* Aumenta o padding */
+    border-radius: 10px; /* Bordas mais arredondadas */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* Sombra mais pronunciada */
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
     z-index: 1000;
@@ -276,320 +295,350 @@ body.dark-mode .spinner {
 }
 
 /* Email rápido section */
-.email-rapido {
-    background-color: #e9ecef;
-    padding: 20px;
-    border-radius: 8px;
-    margin-top: 20px;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
-}
-
-body.dark-mode .email-rapido {
-    background-color: #3d3d3d;
-}
+/* Agrupado com .ocr-section para consistência (definido acima) */
 
 .email-rapido label {
     display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
+    margin-bottom: 10px; /* Aumenta a margem */
+    font-weight: 500; /* Levemente mais fino */
 }
 
 body.dark-mode .email-rapido label {
-    color: #f4f4f4;
+    color: #e0e0e0;
 }
 
 .email-rapido select {
-    width: calc(100% - 20px);
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    width: calc(100% - 24px); /* Ajusta a largura */
+    padding: 12px; /* Aumenta o padding */
+    margin-bottom: 18px; /* Aumenta a margem */
+    border: 1px solid #c0c0c0; /* Borda mais suave */
+    border-radius: 10px; /* Bordas mais arredondadas */
     font-size: 16px;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     color: #333;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 body.dark-mode .email-rapido select {
-    background-color: #3a3a3a;
-    border-color: #555;
-    color: #f4f4f4;
+    background-color: #4a4a4a;
+    border-color: #666;
+    color: #e0e0e0;
 }
 
 .email-rapido button {
-    margin-top: 10px;
-}
-
-.email-rapido pre {
-    background-color: #f0f0f0;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 6px;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 15px;
-    color: #222;
-    margin-top: 15px;
-    max-height: 200px;
-    overflow-y: auto;
-}
-
-body.dark-mode .email-rapido pre {
-    background-color: #4a4a4a;
-    border-color: #666;
-    color: #f4f4f4;
+    margin-top: 15px; /* Aumenta a margem superior */
 }
 
 /* --- Camera Modal Styles --- */
 .modal {
     display: none;
     position: fixed;
-    z-index: 1;
+    z-index: 1000; /* Z-index mais alto para garantir que fique por cima */
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.6);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    background-color: rgba(0,0,0,0.7); /* Fundo mais escuro */
+    backdrop-filter: blur(8px); /* Blur mais pronunciado */
+    -webkit-backdrop-filter: blur(8px);
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 12px;
+    margin: 8% auto; /* Ajusta a margem para aparecer um pouco mais alto */
+    padding: 30px; /* Aumenta o padding */
+    border-radius: 18px; /* Bordas mais arredondadas */
     width: 90%;
-    max-width: 600px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    max-width: 650px; /* Aumenta um pouco a largura máxima */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4); /* Sombra mais forte */
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 20px; /* Aumenta o espaçamento entre os elementos */
 }
 
 body.dark-mode .modal-content {
-    background-color: #333;
-    color: #f4f4f4;
+    background-color: #3b4252;
+    color: #e0e0e0;
 }
 
 .close {
-    color: #aaa;
+    color: #888; /* Cor mais suave */
     position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 28px;
+    top: 15px; /* Ajusta a posição */
+    right: 20px; /* Ajusta a posição */
+    font-size: 32px; /* Aumenta o tamanho */
     font-weight: bold;
     cursor: pointer;
 }
 
 .close:hover,
 .close:focus {
-    color: #000;
+    color: #555; /* Escurece um pouco no hover */
     text-decoration: none;
 }
 
 body.dark-mode .close {
-    color: #bbb;
+    color: #a0a0a0;
 }
 
 body.dark-mode .close:hover,
 body.dark-mode .close:focus {
-    color: #fff;
+    color: #f0f0f0;
 }
-
 
 #camera-feed, #photo-canvas {
     width: 100%;
-    max-height: 400px;
-    object-fit: contain; /* Para garantir que a imagem não seja cortada */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #000; /* Fundo preto para o feed da câmera */
+    max-height: 450px; /* Aumenta a altura máxima */
+    object-fit: contain;
+    border: 2px solid #ddd; /* Borda mais visível */
+    border-radius: 10px;
+    background-color: #111; /* Fundo mais escuro para o feed da câmera */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* Adiciona sombra */
 }
 
 #camera-controls {
     display: flex;
-    flex-wrap: wrap; /* Permite que os botões quebrem a linha */
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
+    gap: 12px; /* Aumenta o espaçamento */
+    margin-top: 15px; /* Aumenta a margem */
 }
 
 #dark-mode-toggle {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #ffcc00; /* Yellow for light mode toggle */
-    color: #333;
+    bottom: 25px; /* Ajusta a posição */
+    right: 25px; /* Ajusta a posição */
+    background-color: #ffeb3b; /* Amarelo mais vibrante */
+    color: #444; /* Cor do ícone mais escura */
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
+    width: 55px; /* Aumenta o tamanho */
+    height: 55px; /* Aumenta o tamanho */
+    font-size: 26px; /* Aumenta a fonte do ícone */
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25); /* Sombra mais pronunciada */
     z-index: 1001;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 body.dark-mode #dark-mode-toggle {
-    background-color: #8a2be2; /* Dark purple for dark mode toggle */
+    background-color: #7b1fa2; /* Roxo escuro para dark mode */
     color: white;
+}
+
+#dark-mode-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
 }
 
 /* Botões rápidos - Adicione flex-wrap para melhor responsividade */
 .botoes-rapidos {
     display: flex;
-    flex-wrap: wrap; /* Adicionado para quebrar linha em telas menores */
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 10px; /* Espaçamento entre os elementos */
-    margin: 15px 0;
+    gap: 12px; /* Aumenta o espaçamento */
+    margin: 20px 0; /* Aumenta a margem */
 }
 
 .botoes-rapidos select {
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
+    padding: 12px; /* Aumenta o padding */
+    border-radius: 10px; /* Bordas mais arredondadas */
+    border: 1px solid #c0c0c0;
     font-size: 16px;
-    background-color: #f9f9f9;
+    background-color: #ffffff;
     color: #333;
-    flex-grow: 1; /* Permite que o select cresça */
-    max-width: 200px; /* Limita o tamanho máximo */
+    flex-grow: 1;
+    max-width: 220px; /* Limita um pouco mais o tamanho máximo */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 body.dark-mode .botoes-rapidos select {
-    background-color: #3a3a3a;
-    border-color: #555;
-    color: #f4f4f4;
+    background-color: #4a4a4a;
+    border-color: #666;
+    color: #e0e0e0;
 }
 
 .botoes-rapidos button {
-    flex-shrink: 0; /* Evita que o botão encolha demais */
+    flex-shrink: 0;
 }
 
 /* Estilos para o Acordeão (Gavetas) */
 .accordion {
-    background-color: #007bff; /* Mesma cor dos botões principais */
+    background-color: #007bff;
     color: white;
     cursor: pointer;
-    padding: 18px;
+    padding: 20px; /* Aumenta o padding */
     width: 100%;
     text-align: left;
     border: none;
     outline: none;
-    transition: background-color 0.4s ease, border-radius 0.4s ease;
-    font-size: 1.2em;
-    border-radius: 8px; /* Cantos arredondados */
-    margin-top: 15px; /* Espaço antes da gaveta */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: background-color 0.4s ease, border-radius 0.4s ease, box-shadow 0.2s ease;
+    font-size: 1.25em; /* Aumenta um pouco a fonte */
+    border-radius: 12px; /* Bordas mais arredondadas */
+    margin-top: 20px; /* Aumenta o espaçamento superior */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Sombra mais suave */
 }
 
 body.dark-mode .accordion {
-    background-color: #6a0dad; /* Cor para modo noturno */
+    background-color: #8a2be2;
 }
 
 .accordion:hover {
     background-color: #0056b3;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
 }
 
 body.dark-mode .accordion:hover {
-    background-color: #4b0082;
+    background-color: #6a0dad;
 }
 
 .accordion.active {
-    background-color: #0056b3; /* Cor mais escura quando ativo */
-    border-bottom-left-radius: 0; /* Remove arredondamento inferior quando aberto */
+    background-color: #0056b3;
+    border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra mais sutil quando ativo */
 }
 
 body.dark-mode .accordion.active {
-    background-color: #4b0082;
+    background-color: #6a0dad;
 }
-
 
 /* Adiciona um ícone de seta */
 .accordion:after {
-    content: '\25BC'; /* Caractere de seta para baixo */
+    content: '\25BC';
     color: white;
     font-weight: bold;
     float: right;
-    margin-left: 5px;
+    margin-left: 8px; /* Aumenta a margem */
     transition: transform 0.3s ease;
 }
 
 .accordion.active:after {
-    content: '\25B2'; /* Caractere de seta para cima */
-    transform: rotate(180deg); /* Gira para cima */
+    content: '\25B2';
+    transform: rotate(180deg);
 }
 
 .panel {
-    padding: 10px 18px; /* Ajuste o padding interno do painel */
-    background-color: white;
-    max-height: 0; /* Começa fechado */
+    padding: 20px 25px; /* Ajusta o padding interno do painel */
+    background-color: #ffffff;
+    max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-out, padding 0.3s ease-out; /* Animação suave para altura e padding */
-    border: 1px solid #ddd;
-    border-top: none; /* Remove borda superior para parecer que continua do botão */
-    border-bottom-left-radius: 8px; /* Arredonda apenas as bordas inferiores */
-    border-bottom-right-radius: 8px;
-    margin-bottom: 20px; /* Espaço após o painel fechado */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Sombra sutil para o painel */
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Transição levemente mais longa */
+    border: 1px solid #e0e0e0; /* Borda mais suave */
+    border-top: none;
+    border-bottom-left-radius: 12px; /* Arredonda apenas as bordas inferiores */
+    border-bottom-right-radius: 12px;
+    margin-bottom: 25px; /* Aumenta o espaço após o painel */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Sombra mais sutil para o painel aberto */
 }
 
 body.dark-mode .panel {
-    background-color: #2b2b2b;
-    border-color: #555;
+    background-color: #3b4252;
+    border-color: #5b6271;
 }
 
-.panel h3 { /* Ajuste o H3 dentro dos painéis para não ter margin-top extra */
-    margin-top: 10px;
+.panel h3 {
+    margin-top: 15px; /* Ajusta o H3 dentro dos painéis */
+    margin-bottom: 10px;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
     .container {
-        padding: 20px;
+        padding: 15px;
+        border-radius: 10px;
     }
 
     button, input[type="file"], textarea, select {
         font-size: 14px;
         padding: 10px 15px;
+        border-radius: 8px;
     }
 
     h2, h3 {
-        font-size: 1.3em;
+        font-size: 1.2em;
+        margin-top: 20px;
+        margin-bottom: 10px;
     }
 
     th, td {
-        padding: 8px;
-        font-size: 14px;
+        padding: 10px;
+        font-size: 13px;
     }
 
     .accordion {
-        font-size: 1em;
-        padding: 15px;
+        font-size: 1.1em;
+        padding: 18px;
+        border-radius: 10px;
+        margin-top: 15px;
+    }
+
+    .panel {
+        padding: 15px 20px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        margin-bottom: 20px;
+    }
+
+    .logo {
+        max-width: 150px;
+        margin-bottom: 25px;
+    }
+
+    .ocr-text-output, .email-rapido pre {
+        max-height: 250px;
+        font-size: 14px;
+        padding: 12px;
     }
 }
 
 @media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    .container {
+        padding: 10px;
+        border-radius: 8px;
+    }
+
     .botoes-rapidos {
-        flex-direction: column; /* Empilha os botões rápidos em telas muito pequenas */
+        flex-direction: column;
         align-items: stretch;
+        gap: 8px;
+        margin: 10px 0;
     }
 
     .botoes-rapidos select, .botoes-rapidos button {
-        max-width: 100%; /* Ocupa a largura total */
-        margin: 5px 0; /* Ajusta margem para vertical */
+        max-width: 100%;
+        margin: 0; /* Remove margens extras */
     }
 
     #dark-mode-toggle {
-        width: 45px;
-        height: 45px;
-        font-size: 20px;
-        bottom: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .modal-content {
+        padding: 20px;
+        border-radius: 15px;
+        gap: 15px;
+    }
+
+    .close {
+        font-size: 26px;
+        top: 10px;
         right: 15px;
+    }
+
+    #camera-feed, #photo-canvas {
+        max-height: 300px;
     }
 }
