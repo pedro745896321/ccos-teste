@@ -17,7 +17,7 @@
         <h2>1. Extrair Texto de Imagem ou Câmera</h2>
         <div>
             <button onclick="openCameraModal()">Tirar Foto (Câmera)</button>
-            <input type="file" id="imagem-upload" accept="image/*" title="Selecione uma imagem para extrair o texto.">
+            <input type="file" id="imagem-upload" accept="image/*" multiple title="Selecione uma ou mais imagens para extrair o texto.">
             <button onclick="enviarImagemOCR()">Extrair Texto da Imagem <span id="ocr-spinner" class="spinner"></span></button>
         </div>
 
@@ -125,6 +125,7 @@
             <div id="camera-controls">
                 <button id="take-photo-button">Capturar Foto</button>
                 <button id="retry-photo-button" style="display: none;">Tentar Novamente</button>
+                <button id="use-photo-button" style="display: none;">Usar Foto</button>
                 <button id="rotate-left-button" style="display: none;">Girar Esquerda</button>
                 <button id="rotate-right-button" style="display: none;">Girar Direita</button>
                 <button id="download-photo-button" style="display: none;">Salvar Foto</button>
