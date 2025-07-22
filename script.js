@@ -292,12 +292,12 @@ document.getElementById('download-photo-button').addEventListener('click', downl
 // NOVA FUNÇÃO: Transferir texto do OCR para o textarea de input
 function transferirParaInput() {
     const textoOCR = document.getElementById("display-ocr-text").textContent;
-    if (textoOCR && textoOCR !== "Nenhum texto extraído ainda.") {
+    if (textoOCR && textoOCR !== "Nenhum texto extraído ainda." && textoOCR !== "Processando imagens...") {
         document.getElementById("input-lista").value = textoOCR;
         gerarTabela(); // Já chama a função para gerar a tabela automaticamente
         showNotification("Texto transferido para o editor!", false);
     } else {
-        showNotification("Não há texto extraído para transferir.", true);
+        showNotification("Não há texto extraído para transferir ou o processamento está em andamento.", true);
     }
 }
 
@@ -627,7 +627,7 @@ document.getElementById('dark-mode-toggle').addEventListener('click', function()
     }
 });
 
-// Verifica a preferência do usuário ao carregar a página
+// Verifica a preferência do usuário ao carregar a página e inicializa acordeões
 document.addEventListener('DOMContentLoaded', function() {
     if (localStorage.getItem('darkMode') === 'enabled') {
         document.body.classList.add('dark-mode');
@@ -636,6 +636,41 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('dark-mode-toggle').textContent = '🌙';
     }
     updateNomeCount();
-    // Esconde a área de exibição do OCR no carregamento inicial
+    // Esconde a área de exibição do OCR no carregamento inicial, mas ela será mostrada
+    // quando o OCR for executado e tiver resultados.
     document.getElementById("ocr-display-area").style.display = 'none';
+
+    // Lógica para os acordeões
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            /* Alterna entre adicionar e remover a classe "active",
+            para destacar o botão que controla o painel */
+            this.classList.toggle("active");
+
+            /* Pega o elemento irmão (o painel) */
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null; // Fecha o painel
+                panel.style.paddingTop = '0px'; // Remove padding top
+                panel.style.paddingBottom = '0px'; // Remove padding bottom
+            } else {
+                // Abre o painel, definindo a altura máxima para o scrollHeight
+                // Isso permite que o painel se expanda para seu conteúdo total
+                panel.style.maxHeight = panel.scrollHeight + "px";
+                panel.style.paddingTop = '10px'; // Restaura padding top
+                panel.style.paddingBottom = '10px'; // Restaura padding bottom
+            }
+        });
+    }
+
+    // Opcional: Abrir a primeira gaveta ao carregar a página
+    if (acc.length > 0) {
+        // Usa setTimeout para garantir que a transição seja animada
+        setTimeout(() => {
+            acc[0].click();
+        }, 100);
+    }
 });
