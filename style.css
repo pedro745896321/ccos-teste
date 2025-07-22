@@ -1,521 +1,508 @@
-body {
-    font-family: 'Roboto', sans-serif; /* Fonte mais moderna e limpa */
-    background-color: #e9eff5; /* Fundo mais suave e claro */
-    color: #333;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    box-sizing: border-box;
-    transition: background-color 0.3s, color 0.3s;
-}
-
 /* Importar fonte Roboto do Google Fonts (adicione ao seu HTML no <head>):
    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 */
 
-/* Dark Mode Styles */
-body.dark-mode {
-    background-color: #282c34; /* Fundo escuro mais suave */
-    color: #e0e0e0; /* Texto mais claro */
+body {
+    font-family: 'Roboto', sans-serif; /* Mantendo Roboto para uma leitura moderna */
+    background-image: url('https://s1.1zoom.me/b3742/769/Cats_Black_Black_511583_1920x1080.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    color: white; /* Texto branco sobre o fundo escuro */
+    padding: 20px; /* Ajustei para usar padding em vez de padding-top */
+    margin: 0; /* Removendo margem padrão do body */
+    display: flex; /* Para centralizar o container */
+    flex-direction: column; /* Para empilhar o conteúdo */
+    align-items: center; /* Para centralizar horizontalmente */
+    min-height: 100vh; /* Para ocupar a altura total da viewport */
+    box-sizing: border-box; /* Incluir padding no cálculo da largura/altura */
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+    position: relative; /* Necessário para a pseudo-classe ::before */
 }
 
+/* Overlay para escurecer a imagem de fundo no dark mode */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0); /* Transparente por padrão */
+    transition: background-color 0.5s ease-in-out;
+    z-index: -1; /* Fica atrás do conteúdo */
+}
+
+body.dark-mode::before {
+    background-color: rgba(0, 0, 0, 0.4); /* Escurece a imagem no dark mode */
+}
+
+
+/* CONTAINER - Reintroduzindo para organizar o conteúdo */
 .container {
-    background-color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente para o container */
     padding: 30px;
-    border-radius: 15px; /* Bordas mais arredondadas */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada e suave */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Sombra mais escura para combinar */
     width: 100%;
     max-width: 900px;
     margin-bottom: 20px;
     box-sizing: border-box;
+    color: white; /* Texto branco dentro do container por padrão */
+    transition: background-color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
 }
 
 body.dark-mode .container {
-    background-color: #3b4252; /* Fundo do container no dark mode */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4); /* Sombra mais escura para o dark mode */
+    background-color: rgba(0, 0, 0, 0.85); /* Container mais escuro no dark mode */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
 }
+
 
 .logo {
-    max-width: 180px;
+    max-width: 180px; /* Mantendo um tamanho razoável */
     display: block;
-    margin: 0 auto 35px auto; /* Aumenta um pouco o espaçamento inferior do logo */
+    margin: 0 auto 30px auto;
 }
 
-h2, h3 {
-    color: #007bff; /* Azul primário */
-    text-align: center;
-    margin-top: 30px; /* Aumenta o espaçamento superior */
-    margin-bottom: 20px; /* Aumenta o espaçamento inferior */
-    font-weight: 500; /* Levemente mais fino para um visual mais moderno */
+h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: gold; /* Título principal dourado */
+    transition: color 0.5s ease-in-out;
+}
+
+/* Novo estilo para h3, incluindo o do OCR */
+h3 {
+    font-size: 26px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    color: gold; /* H3 dourado */
+    transition: color 0.5s ease-in-out;
 }
 
 body.dark-mode h2,
 body.dark-mode h3 {
-    color: #61dafb; /* Azul ciano para dark mode, mais vivo */
+    color: #ffd700; /* Um dourado ligeiramente diferente no dark mode */
+}
+
+textarea {
+    width: calc(100% - 30px); /* Ajustando largura para padding de 15px */
+    height: 300px;
+    font-size: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+    background-color: #333; /* Fundo mais escuro para textarea */
+    color: #eee; /* Texto claro */
+    border: 1px solid #555; /* Borda mais escura */
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+}
+
+body.dark-mode textarea {
+    background-color: #444;
+    color: #fff;
+    border-color: #777;
+}
+
+button,
+select,
+input[type="file"] {
+    padding: 15px 30px;
+    font-size: 20px;
+    margin: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease, color 0.3s ease; /* Adicionando transições */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para botões */
+}
+
+input[type="file"] {
+    color: white; /* Cor do texto no input file */
+    background-color: rgba(50, 50, 50, 0.8); /* Fundo semi-transparente */
+    border: 1px solid #666;
+}
+
+body.dark-mode input[type="file"] {
+    background-color: rgba(70, 70, 70, 0.9);
+    border-color: #888;
 }
 
 button {
-    background-color: #007bff;
-    color: white;
-    padding: 12px 22px; /* Aumenta um pouco o padding horizontal */
-    border: none;
-    border-radius: 10px; /* Bordas mais arredondadas */
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Adiciona transição para sombra */
-    margin: 6px; /* Ajusta a margem */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra mais suave */
+    background: gold;
+    color: black;
+    font-weight: bold;
 }
 
 button:hover {
-    background-color: #0056b3;
-    transform: translateY(-3px); /* Movimento mais pronunciado no hover */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25); /* Sombra maior no hover */
+    background: #e0b800; /* Dourado um pouco mais escuro no hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 button:active {
-    background-color: #004085;
+    background-color: #c4a100;
     transform: translateY(0);
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra menor no active */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 button:disabled {
     background-color: #cccccc;
     cursor: not-allowed;
-    box-shadow: none; /* Remove sombra quando desativado */
+    box-shadow: none;
+    color: #666; /* Cor do texto no botão desabilitado */
 }
 
+/* Dark Mode para Botões, Selects e File Input */
 body.dark-mode button {
-    background-color: #8a2be2; /* Roxo para dark mode */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background-color: #4a4a4a; /* Cinza escuro para botões no dark mode */
+    color: gold; /* Texto dourado */
+    border: 1px solid gold; /* Borda dourada */
 }
 
 body.dark-mode button:hover {
-    background-color: #6a0dad; /* Roxo mais escuro no hover */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    background: #666;
+    color: white; /* Texto branco no hover para dark mode */
 }
 
 body.dark-mode button:active {
-    background-color: #550080;
+    background-color: #333;
 }
 
-input[type="file"] {
-    margin: 12px 0; /* Ajusta a margem */
-    padding: 12px; /* Aumenta o padding */
-    border: 1px solid #c0c0c0; /* Borda mais suave */
-    border-radius: 10px; /* Bordas mais arredondadas */
-    background-color: #ffffff;
-    color: #333;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Sombra interna sutil */
-}
-
-body.dark-mode input[type="file"] {
+body.dark-mode select {
     background-color: #4a4a4a;
-    border-color: #666;
-    color: #e0e0e0;
+    color: gold;
+    border: 1px solid gold;
 }
 
-textarea {
-    width: calc(100% - 24px); /* Ajusta a largura para o novo padding */
-    padding: 18px; /* Aumenta o padding */
-    margin: 18px 0; /* Ajusta a margem */
-    border: 1px solid #c0c0c0; /* Borda mais suave */
-    border-radius: 10px; /* Bordas mais arredondadas */
-    font-size: 17px; /* Aumenta levemente a fonte */
-    min-height: 180px; /* Aumenta a altura mínima */
-    resize: vertical;
-    box-sizing: border-box;
-    background-color: #ffffff;
-    color: #333;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Sombra interna sutil */
-}
 
-body.dark-mode textarea {
-    background-color: #4a4a4a;
-    border-color: #666;
-    color: #e0e0e0;
-}
-
-.ocr-section, .email-rapido { /* Agrupado para consistência */
-    background-color: #f7f9fc; /* Fundo mais claro */
-    padding: 25px; /* Aumenta o padding */
-    border-radius: 12px; /* Bordas mais arredondadas */
-    margin-top: 25px; /* Aumenta a margem superior */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Sombra mais presente */
-}
-
-body.dark-mode .ocr-section,
-body.dark-mode .email-rapido {
-    background-color: #3b4252;
-    color: #e0e0e0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-
-.ocr-text-output, .email-rapido pre { /* Agrupado para consistência */
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    max-height: 350px; /* Aumenta a altura máxima */
-    overflow-y: auto;
-    background-color: #f0f4f7; /* Fundo mais claro */
-    border: 1px solid #d0d0d0; /* Borda mais suave */
-    padding: 15px; /* Aumenta o padding */
-    border-radius: 8px; /* Bordas mais arredondadas */
-    font-family: 'Roboto Mono', monospace; /* Fonte monoespaçada mais moderna */
-    font-size: 15px;
-    color: #222;
-    margin-bottom: 20px; /* Aumenta a margem inferior */
-}
-
-body.dark-mode .ocr-text-output,
-body.dark-mode .email-rapido pre {
-    background-color: #4a4a4a;
-    border-color: #666;
-    color: #e0e0e0;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 25px 0; /* Aumenta a margem */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
-    border-radius: 10px; /* Bordas arredondadas na tabela inteira */
-    overflow: hidden; /* Garante que as bordas arredondadas sejam visíveis */
-}
-
-body.dark-mode table {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-th, td {
-    border: 1px solid #e0e0e0; /* Bordas mais claras */
-    padding: 14px; /* Aumenta o padding */
-    text-align: left;
-    vertical-align: top;
-}
-
-th {
-    background-color: #007bff;
-    color: white;
-    font-weight: 600; /* Levemente mais encorpado */
-}
-
-body.dark-mode th {
-    background-color: #8a2be2;
-}
-
-tr:nth-child(even) {
-    background-color: #f7f9fc; /* Fundo mais suave para linhas pares */
-}
-
-body.dark-mode tr:nth-child(even) {
-    background-color: #3b4252;
-}
-
-tr:hover {
-    background-color: #e0f0ff; /* Azul claro sutil no hover */
-}
-
-body.dark-mode tr:hover {
-    background-color: #4b5263; /* Cor mais escura para dark mode hover */
-}
-
-/* Estilo para CPF inválido */
-.cpf-invalido {
-    color: #dc3545; /* Vermelho mais padrão */
-    font-weight: bold;
-}
-
-body.dark-mode .cpf-invalido {
-    color: #ff7b7b; /* Vermelho mais claro para dark mode */
-}
-
-/* Estilo para itens marcados como "feito" */
-td.riscado {
-    text-decoration: line-through;
-    color: #888;
-    opacity: 0.7; /* Suaviza um pouco mais */
-}
-
-td button.riscado {
-    background-color: #a0a0a0; /* Cor mais suave para o botão riscado */
-    text-decoration: line-through;
-    cursor: default;
-    box-shadow: none; /* Remove sombra */
-}
-
-td button.desativado:hover {
-    background-color: #a0a0a0;
-    transform: none;
-    box-shadow: none;
-}
-
-/* Spinner Styles */
-.spinner {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #007bff;
-    border-radius: 50%;
-    width: 18px; /* Aumenta levemente */
-    height: 18px; /* Aumenta levemente */
-    animation: spin 1s linear infinite;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 10px; /* Aumenta a margem */
-    display: none;
-}
-
-body.dark-mode .spinner {
-    border-left-color: #61dafb; /* Cor do spinner no dark mode */
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-/* Notification styles */
 .notification {
     position: fixed;
-    bottom: 25px; /* Ajusta a posição */
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #28a745; /* Verde mais padrão */
+    background-color: #4CAF50;
     color: white;
-    padding: 12px 25px; /* Aumenta o padding */
-    border-radius: 10px; /* Bordas mais arredondadas */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* Sombra mais pronunciada */
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 1001;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
-    z-index: 1000;
+    pointer-events: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .notification.show {
     opacity: 1;
 }
 
-/* Email rápido section */
-/* Agrupado com .ocr-section para consistência (definido acima) */
-
-.email-rapido label {
-    display: block;
-    margin-bottom: 10px; /* Aumenta a margem */
-    font-weight: 500; /* Levemente mais fino */
+body.dark-mode .notification {
+    background-color: #3a3a3a;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(255,255,255,0.1);
 }
 
-body.dark-mode .email-rapido label {
-    color: #e0e0e0;
-}
-
-.email-rapido select {
-    width: calc(100% - 24px); /* Ajusta a largura */
-    padding: 12px; /* Aumenta o padding */
-    margin-bottom: 18px; /* Aumenta a margem */
-    border: 1px solid #c0c0c0; /* Borda mais suave */
-    border-radius: 10px; /* Bordas mais arredondadas */
-    font-size: 16px;
-    background-color: #ffffff;
-    color: #333;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-body.dark-mode .email-rapido select {
-    background-color: #4a4a4a;
-    border-color: #666;
-    color: #e0e0e0;
-}
-
-.email-rapido button {
-    margin-top: 15px; /* Aumenta a margem superior */
-}
-
-/* --- Camera Modal Styles --- */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000; /* Z-index mais alto para garantir que fique por cima */
-    left: 0;
-    top: 0;
+table {
     width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.7); /* Fundo mais escuro */
-    backdrop-filter: blur(8px); /* Blur mais pronunciado */
-    -webkit-backdrop-filter: blur(8px);
+    border-collapse: collapse;
+    margin-top: 20px; /* Ajustado */
+    background: #333; /* Fundo escuro para a tabela */
+    color: white; /* Texto claro */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 8% auto; /* Ajusta a margem para aparecer um pouco mais alto */
-    padding: 30px; /* Aumenta o padding */
-    border-radius: 18px; /* Bordas mais arredondadas */
-    width: 90%;
-    max-width: 650px; /* Aumenta um pouco a largura máxima */
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4); /* Sombra mais forte */
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px; /* Aumenta o espaçamento entre os elementos */
+body.dark-mode table {
+    background: #444;
+    color: #eee;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
 }
 
-body.dark-mode .modal-content {
-    background-color: #3b4252;
-    color: #e0e0e0;
+th,
+td {
+    border: 1px solid #555; /* Bordas mais suaves */
+    padding: 15px; /* Ajustado */
+    text-align: center;
+    font-size: 18px; /* Ajustado */
+    transition: border-color 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
-.close {
-    color: #888; /* Cor mais suave */
-    position: absolute;
-    top: 15px; /* Ajusta a posição */
-    right: 20px; /* Ajusta a posição */
-    font-size: 32px; /* Aumenta o tamanho */
+th {
+    background-color: #1a1a1a; /* Cabeçalho mais escuro */
+    color: gold; /* Texto dourado */
     font-weight: bold;
+}
+
+body.dark-mode th {
+    background-color: #2a2a2a;
+    color: #ffd700;
+}
+
+/* Linhas pares */
+tr:nth-child(even) {
+    background-color: #222; /* Fundo para linhas pares no modo claro */
+}
+
+body.dark-mode tr:nth-child(even) {
+    background-color: #333; /* Fundo para linhas pares no dark mode */
+}
+
+/* Hover na linha */
+tr:hover {
+    background-color: #444; /* Escurece no hover */
+}
+
+body.dark-mode tr:hover {
+    background-color: #555;
+}
+
+
+/* Estilos para CPF inválido */
+td.cpf-invalido {
+    background-color: darkred;
+    color: white;
+}
+
+input[type="checkbox"] {
+    width: 25px; /* Ajustado */
+    height: 25px; /* Ajustado */
+    transform: scale(1.2); /* Menos zoom */
+    margin: 8px; /* Ajustado */
     cursor: pointer;
 }
 
-.close:hover,
-.close:focus {
-    color: #555; /* Escurece um pouco no hover */
-    text-decoration: none;
-}
-
-body.dark-mode .close {
-    color: #a0a0a0;
-}
-
-body.dark-mode .close:hover,
-body.dark-mode .close:focus {
-    color: #f0f0f0;
-}
-
-#camera-feed, #photo-canvas {
-    width: 100%;
-    max-height: 450px; /* Aumenta a altura máxima */
-    object-fit: contain;
-    border: 2px solid #ddd; /* Borda mais visível */
+.email-rapido {
+    margin-top: 30px;
+    padding: 25px; /* Aumentado */
+    background: rgba(0, 0, 0, 0.7);
     border-radius: 10px;
-    background-color: #111; /* Fundo mais escuro para o feed da câmera */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* Adiciona sombra */
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
-#camera-controls {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px; /* Aumenta o espaçamento */
-    margin-top: 15px; /* Aumenta a margem */
+body.dark-mode .email-rapido {
+    background: rgba(0, 0, 0, 0.85);
+    color: #eee;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
 }
 
+input[type="text"] {
+    padding: 12px; /* Ajustado */
+    margin: 10px 0;
+    width: calc(100% - 24px); /* Ajustado para novo padding */
+    border: none;
+    border-radius: 8px; /* Mais arredondado */
+    background-color: #333; /* Fundo escuro */
+    color: #eee; /* Texto claro */
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+body.dark-mode input[type="text"] {
+    background-color: #444;
+    color: #fff;
+}
+
+.riscado {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.desativado {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* Botão de Toggle do Modo Noturno - Movido para o canto inferior direito como no estilo original */
 #dark-mode-toggle {
     position: fixed;
-    bottom: 25px; /* Ajusta a posição */
-    right: 25px; /* Ajusta a posição */
-    background-color: #ffeb3b; /* Amarelo mais vibrante */
-    color: #444; /* Cor do ícone mais escura */
+    bottom: 20px;
+    right: 20px;
+    background-color: #333; /* Cor consistente com o tema */
+    color: gold; /* Cor do ícone dourada */
+    border: 2px solid gold; /* Borda dourada */
+    padding: 0;
+    width: 50px; /* Tamanho ajustado */
+    height: 50px; /* Tamanho ajustado */
     border-radius: 50%;
-    width: 55px; /* Aumenta o tamanho */
-    height: 55px; /* Aumenta o tamanho */
-    font-size: 26px; /* Aumenta a fonte do ícone */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.25); /* Sombra mais pronunciada */
-    z-index: 1001;
     cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-body.dark-mode #dark-mode-toggle {
-    background-color: #7b1fa2; /* Roxo escuro para dark mode */
-    color: white;
+    font-size: 24px;
+    z-index: 1000;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 #dark-mode-toggle:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    background-color: #4a4a4a; /* Um pouco mais claro no hover */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
 }
 
-/* Botões rápidos - Adicione flex-wrap para melhor responsividade */
-.botoes-rapidos {
+body.dark-mode #dark-mode-toggle {
+    background-color: gold; /* Fundo dourado no dark mode */
+    color: black; /* Ícone preto */
+    border-color: black;
+}
+body.dark-mode #dark-mode-toggle:hover {
+    background-color: #e0b800; /* Dourado escuro no hover dark mode */
+}
+
+
+/* Loading Spinner */
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3); /* Cor do spinner para combinar com tema escuro */
+    border-left-color: gold; /* Cor do spinner de destaque */
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Estilos para a área da câmera */
+#camera-feed {
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    border: 1px solid #777; /* Borda mais visível */
+    margin-top: 10px;
+    background-color: black;
+    border-radius: 8px; /* Bordas arredondadas */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+#camera-controls {
+    margin-top: 15px; /* Ajustado */
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 12px; /* Aumenta o espaçamento */
-    margin: 20px 0; /* Aumenta a margem */
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
-.botoes-rapidos select {
-    padding: 12px; /* Aumenta o padding */
-    border-radius: 10px; /* Bordas mais arredondadas */
-    border: 1px solid #c0c0c0;
-    font-size: 16px;
-    background-color: #ffffff;
-    color: #333;
-    flex-grow: 1;
-    max-width: 220px; /* Limita um pouco mais o tamanho máximo */
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+#photo-canvas {
+    display: none; /* Oculta o canvas inicialmente */
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    border: 1px solid #777;
+    margin-top: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-body.dark-mode .botoes-rapidos select {
-    background-color: #4a4a4a;
-    border-color: #666;
-    color: #e0e0e0;
+/* --- NOVOS ESTILOS PARA A ÁREA DE EXIBIÇÃO DO OCR --- */
+.ocr-section {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 25px; /* Aumentado */
+    border-radius: 12px; /* Mais arredondado */
+    margin-top: 25px;
+    margin-bottom: 25px;
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.5s ease-in-out;
 }
 
-.botoes-rapidos button {
-    flex-shrink: 0;
+.ocr-section h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: gold;
 }
 
-/* Estilos para o Acordeão (Gavetas) */
+.ocr-text-output {
+    background-color: #222;
+    color: #aaffaa;
+    padding: 15px;
+    border-radius: 8px;
+    font-family: 'Roboto Mono', monospace; /* Mantendo Roboto Mono */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    min-height: 80px;
+    overflow-y: auto;
+    border: 1px solid #555;
+    margin-bottom: 15px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}
+
+body.dark-mode .ocr-section {
+    background-color: rgba(0, 0, 0, 0.85);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+}
+
+body.dark-mode .ocr-text-output {
+    background-color: #333;
+    color: #90ee90;
+    border-color: #777;
+}
+
+/* Estilos para o Acordeão (Gavetas) - Adaptados para o novo tema */
 .accordion {
-    background-color: #007bff;
-    color: white;
+    background-color: #1a1a1a; /* Fundo escuro */
+    color: gold; /* Texto dourado */
     cursor: pointer;
-    padding: 20px; /* Aumenta o padding */
+    padding: 18px;
     width: 100%;
     text-align: left;
-    border: none;
+    border: 1px solid gold; /* Borda dourada */
     outline: none;
-    transition: background-color 0.4s ease, border-radius 0.4s ease, box-shadow 0.2s ease;
-    font-size: 1.25em; /* Aumenta um pouco a fonte */
-    border-radius: 12px; /* Bordas mais arredondadas */
-    margin-top: 20px; /* Aumenta o espaçamento superior */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Sombra mais suave */
+    transition: background-color 0.4s ease, border-radius 0.4s ease, box-shadow 0.2s ease, color 0.4s ease, border-color 0.4s ease;
+    font-size: 1.2em;
+    border-radius: 12px; /* Cantos arredondados */
+    margin-top: 20px; /* Espaço antes da gaveta */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 body.dark-mode .accordion {
-    background-color: #8a2be2;
+    background-color: #2a2a2a; /* Um pouco mais claro no dark mode */
+    color: #ffd700;
+    border-color: #ffd700;
 }
 
 .accordion:hover {
-    background-color: #0056b3;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    background-color: #333; /* Escurece um pouco no hover */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
 }
 
 body.dark-mode .accordion:hover {
-    background-color: #6a0dad;
+    background-color: #444;
 }
 
 .accordion.active {
-    background-color: #0056b3;
+    background-color: #333; /* Fundo mais escuro quando ativo */
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra mais sutil quando ativo */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 body.dark-mode .accordion.active {
-    background-color: #6a0dad;
+    background-color: #444;
 }
 
 /* Adiciona um ícone de seta */
 .accordion:after {
     content: '\25BC';
-    color: white;
+    color: gold; /* Seta dourada */
     font-weight: bold;
     float: right;
-    margin-left: 8px; /* Aumenta a margem */
-    transition: transform 0.3s ease;
+    margin-left: 5px;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode .accordion:after {
+    color: #ffd700;
 }
 
 .accordion.active:after {
@@ -524,121 +511,218 @@ body.dark-mode .accordion.active {
 }
 
 .panel {
-    padding: 20px 25px; /* Ajusta o padding interno do painel */
-    background-color: #ffffff;
+    padding: 20px 25px;
+    background-color: #1a1a1a; /* Fundo do painel */
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Transição levemente mais longa */
-    border: 1px solid #e0e0e0; /* Borda mais suave */
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+    border: 1px solid gold; /* Borda dourada */
     border-top: none;
-    border-bottom-left-radius: 12px; /* Arredonda apenas as bordas inferiores */
+    border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
-    margin-bottom: 25px; /* Aumenta o espaço após o painel */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08); /* Sombra mais sutil para o painel aberto */
+    margin-bottom: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    color: white; /* Texto claro no painel */
 }
 
 body.dark-mode .panel {
-    background-color: #3b4252;
-    border-color: #5b6271;
+    background-color: #2a2a2a;
+    border-color: #ffd700;
+    color: #eee;
 }
 
 .panel h3 {
-    margin-top: 15px; /* Ajusta o H3 dentro dos painéis */
+    margin-top: 15px;
     margin-bottom: 10px;
+    color: gold; /* Título dentro do painel */
 }
 
-/* Responsividade */
+/* RESPONSIVIDADE PARA CELULARES E TABLETS */
 @media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
     .container {
         padding: 15px;
         border-radius: 10px;
     }
 
-    button, input[type="file"], textarea, select {
-        font-size: 14px;
-        padding: 10px 15px;
-        border-radius: 8px;
-    }
-
-    h2, h3 {
-        font-size: 1.2em;
-        margin-top: 20px;
-        margin-bottom: 10px;
-    }
-
-    th, td {
-        padding: 10px;
-        font-size: 13px;
-    }
-
-    .accordion {
-        font-size: 1.1em;
-        padding: 18px;
-        border-radius: 10px;
-        margin-top: 15px;
-    }
-
-    .panel {
-        padding: 15px 20px;
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
+    .logo {
+        width: 90%;
+        max-width: 150px; /* Ajustado */
         margin-bottom: 20px;
     }
 
-    .logo {
-        max-width: 150px;
-        margin-bottom: 25px;
+    h2 {
+        font-size: 24px; /* Ajustado */
+        margin-bottom: 15px;
     }
 
-    .ocr-text-output, .email-rapido pre {
-        max-height: 250px;
+    h3 {
+        font-size: 20px; /* Ajustado */
+        margin-top: 15px;
+        margin-bottom: 10px;
+    }
+
+    textarea {
+        width: calc(100% - 20px); /* Ajustado */
+        height: 180px;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    button,
+    select,
+    input[type="file"] {
+        width: calc(100% - 16px); /* Ajustado para padding */
+        padding: 12px; /* Ajustado */
+        font-size: 16px;
+        margin: 8px;
+    }
+
+    input[type="text"] {
+        width: calc(100% - 20px) !important; /* Ajustado */
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    table,
+    th,
+    td {
         font-size: 14px;
-        padding: 12px;
+        padding: 10px;
+        word-break: break-word;
     }
-}
 
-@media (max-width: 480px) {
-    body {
-        padding: 10px;
+    input[type="checkbox"] {
+        width: 20px; /* Ajustado */
+        height: 20px; /* Ajustado */
+        transform: scale(1); /* Sem zoom */
+        margin: 5px;
     }
-    .container {
-        padding: 10px;
-        border-radius: 8px;
+
+    .email-rapido {
+        padding: 15px;
     }
 
     .botoes-rapidos {
         flex-direction: column;
-        align-items: stretch;
         gap: 8px;
-        margin: 10px 0;
     }
 
-    .botoes-rapidos select, .botoes-rapidos button {
+    .botoes-rapidos select,
+    .botoes-rapidos button {
+        width: calc(100% - 16px);
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .ocr-text-output,
+    .email-rapido pre {
+        font-size: 13px;
+        white-space: pre-wrap;
+        padding: 10px;
+    }
+
+    .modal-content {
+        width: 95%;
+        font-size: 14px;
+        padding: 20px;
+    }
+
+    #dark-mode-toggle {
+        width: 45px;
+        height: 45px;
+        font-size: 22px;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    /* Responsividade para a área de OCR */
+    .ocr-section {
+        padding: 18px;
+        margin-top: 18px;
+        margin-bottom: 18px;
+    }
+    .ocr-text-output {
+        min-height: 60px;
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    #camera-feed, #photo-canvas {
         max-width: 100%;
-        margin: 0; /* Remove margens extras */
+        max-height: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        max-width: 120px; /* Ainda menor */
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 18px;
+    }
+
+    textarea {
+        height: 150px;
+        font-size: 14px;
+    }
+
+    button,
+    select,
+    input[type="file"] {
+        font-size: 14px;
+        padding: 10px;
+        margin: 5px;
+    }
+
+    input[type="text"] {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    th,
+    td {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .ocr-text-output,
+    .email-rapido pre {
+        font-size: 12px;
+    }
+
+    .accordion {
+        font-size: 1em;
+        padding: 15px;
+    }
+
+    .panel {
+        padding: 15px 20px;
     }
 
     #dark-mode-toggle {
         width: 40px;
         height: 40px;
-        font-size: 18px;
+        font-size: 20px;
         bottom: 10px;
         right: 10px;
     }
+}
 
-    .modal-content {
-        padding: 20px;
-        border-radius: 15px;
-        gap: 15px;
-    }
+/* Animações (mantidas do seu código) */
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
 
-    .close {
-        font-size: 26px;
-        top: 10px;
-        right: 15px;
-    }
-
-    #camera-feed, #photo-canvas {
-        max-height: 300px;
-    }
+.pular {
+    animation: bounce 0.5s ease;
 }
