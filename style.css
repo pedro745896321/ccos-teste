@@ -1,526 +1,595 @@
 body {
     font-family: Arial, sans-serif;
-    background-image: url('https://s1.1zoom.me/b3742/769/Cats_Black_Black_511583_1920x1080.jpg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed;
-    color: white;
-    text-align: center;
-    padding: 50px;
-    transition: background-color 0.5s, color 0.5s;
-}
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.8);
-    padding-top: 60px;
-}
-
-.modal-content {
-    background-color: #fefefe;
-    margin: 5% auto;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
     padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    color: black;
-    transition: background-color 0.5s, color 0.5s;
-    position: relative; /* Para posicionar o botão de fechar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.close {
-    position: absolute;
-    top: 10px;
-    right: 25px;
-    color: #aaa;
-    font-size: 35px;
-    font-weight: bold;
-    cursor: pointer;
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #1a1a1a;
+    color: #f4f4f4;
 }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+.container {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 900px;
+    margin-bottom: 20px; /* Adicionado espaço para o botão de modo noturno */
+    box-sizing: border-box;
 }
 
-h2 {
-    font-size: 32px;
-    margin-bottom: 20px;
-    color: white;
-    transition: color 0.5s;
+body.dark-mode .container {
+    background-color: #2c2c2c;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Novo estilo para h3, incluindo o do OCR */
-h3 {
-    font-size: 26px;
+.logo {
+    max-width: 180px;
+    display: block;
+    margin: 0 auto 30px auto;
+}
+
+h2, h3 {
+    color: #0056b3;
+    text-align: center;
     margin-top: 25px;
     margin-bottom: 15px;
-    color: white; /* Cor padrão */
-    transition: color 0.5s;
 }
 
-
-textarea {
-    width: 90%;
-    height: 300px;
-    font-size: 20px;
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 10px;
-    background-color: white;
-    color: black;
-    border: 1px solid #ccc;
-    transition: background-color 0.5s, color 0.5s, border-color 0.5s;
-}
-
-button,
-select,
-input[type="file"] {
-    padding: 15px 30px;
-    font-size: 20px;
-    margin: 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    border: none;
-    transition: background-color 0.5s, color 0.5;
-}
-
-input[type="file"] {
-    color: black;
-    background-color: #f0f0f0;
+body.dark-mode h2,
+body.dark-mode h3 {
+    color: #87ceeb; /* Light blue for dark mode headings */
 }
 
 button {
-    background: gold;
-    color: black;
-    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 button:hover {
-    background: #9e943e;
+    background-color: #0056b3;
+    transform: translateY(-2px);
 }
 
+button:active {
+    background-color: #004085;
+    transform: translateY(0);
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+body.dark-mode button {
+    background-color: #6a0dad; /* Purple for dark mode buttons */
+}
+
+body.dark-mode button:hover {
+    background-color: #4b0082; /* Darker purple on hover */
+}
+
+body.dark-mode button:active {
+    background-color: #330055;
+}
+
+input[type="file"] {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+body.dark-mode input[type="file"] {
+    background-color: #3a3a3a;
+    border-color: #555;
+    color: #f4f4f4;
+}
+
+textarea {
+    width: calc(100% - 20px);
+    padding: 15px;
+    margin: 15px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    min-height: 150px;
+    resize: vertical;
+    box-sizing: border-box;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+body.dark-mode textarea {
+    background-color: #3a3a3a;
+    border-color: #555;
+    color: #f4f4f4;
+}
+
+.ocr-section {
+    background-color: #e9ecef;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+body.dark-mode .ocr-section {
+    background-color: #3d3d3d;
+    color: #f4f4f4;
+    box-shadow: inset 0 1px 3px rgba(255,255,255,0.05);
+}
+
+.ocr-text-output {
+    white-space: pre-wrap; /* Preserves whitespace and wraps text */
+    word-wrap: break-word; /* Breaks long words */
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 6px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: #222;
+    margin-bottom: 15px;
+}
+
+body.dark-mode .ocr-text-output {
+    background-color: #4a4a4a;
+    border-color: #666;
+    color: #f4f4f4;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode table {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+body.dark-mode th {
+    background-color: #6a0dad;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+body.dark-mode tr:nth-child(even) {
+    background-color: #3a3a3a;
+}
+
+tr:hover {
+    background-color: #e6e6e6;
+}
+
+body.dark-mode tr:hover {
+    background-color: #4a4a4a;
+}
+
+/* Estilo para CPF inválido */
+.cpf-invalido {
+    color: red;
+    font-weight: bold;
+}
+
+body.dark-mode .cpf-invalido {
+    color: #ff6b6b; /* Lighter red for dark mode */
+}
+
+/* Estilo para itens marcados como "feito" */
+td.riscado {
+    text-decoration: line-through;
+    color: #888;
+}
+
+td button.riscado {
+    background-color: #888; /* Cor mais neutra para o botão riscado */
+    text-decoration: line-through;
+    cursor: default; /* Remove o cursor de link/botão */
+}
+
+td button.desativado:hover {
+    background-color: #888; /* Mantém a cor no hover para desativado */
+    transform: none; /* Remove a animação no hover para desativado */
+}
+
+/* Spinner Styles */
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #007bff;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+    display: none; /* Hidden by default */
+}
+
+body.dark-mode .spinner {
+    border-left-color: #6a0dad;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Notification styles */
 .notification {
     position: fixed;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* Green */
     color: white;
     padding: 10px 20px;
-    border-radius: 5px;
-    z-index: 1001;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
-    pointer-events: none;
+    z-index: 1000;
 }
 
 .notification.show {
     opacity: 1;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 5px;
-    background: white;
-    color: black;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: background-color 0.5s, color 0.5s;
-}
-
-th,
-td {
-    border: 2px solid black;
-    padding: 20px;
-    text-align: center;
-    font-size: 22px;
-    transition: border-color 0.5s, color 0.5s;
-}
-
-/* Estilos para CPF inválido */
-td.cpf-invalido {
-    background-color: red;
-    color: white;
-}
-
-input[type="checkbox"] {
-    width: 30px;
-    height: 30px;
-    transform: scale(1.5);
-    margin: 10px;
-    cursor: pointer;
-}
-
-.logo {
-    width: 600px;
-    height: auto;
-    margin-bottom: 20px;
-}
-
+/* Email rápido section */
 .email-rapido {
-    margin-top: 30px;
+    background-color: #e9ecef;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 10px;
-    color: white;
-    transition: background-color 0.5s, color 0.5s;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
 }
 
-input[type="text"] {
+body.dark-mode .email-rapido {
+    background-color: #3d3d3d;
+}
+
+.email-rapido label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+body.dark-mode .email-rapido label {
+    color: #f4f4f4;
+}
+
+.email-rapido select {
+    width: calc(100% - 20px);
     padding: 10px;
-    margin: 10px 0;
-    width: calc(100% - 22px);
-    border: none;
-    border-radius: 5px;
-    background-color: white;
-    color: black;
-    transition: background-color 0.5s, color 0.5s;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #333;
 }
 
-.riscado {
-    text-decoration: line-through;
-    opacity: 0.6;
+body.dark-mode .email-rapido select {
+    background-color: #3a3a3a;
+    border-color: #555;
+    color: #f4f4f4;
 }
 
-.desativado {
-    pointer-events: none;
-    opacity: 0.5;
+.email-rapido button {
+    margin-top: 10px;
 }
 
-/* --- Modo Noturno --- */
-body.dark-mode {
-    background-color: #222;
-    color: #eee;
-    /* Removida a redefinição de background-image, já que a opacidade é usada para escurecer */
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    background-attachment: fixed;
+.email-rapido pre {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 6px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: #222;
+    margin-top: 15px;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
-body.dark-mode::before {
-    opacity: 0.08;
+body.dark-mode .email-rapido pre {
+    background-color: #4a4a4a;
+    border-color: #666;
+    color: #f4f4f4;
+}
+
+/* --- Camera Modal Styles --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
 }
 
 body.dark-mode .modal-content {
     background-color: #333;
-    color: #eee;
-    border-color: #555;
+    color: #f4f4f4;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+body.dark-mode .close {
+    color: #bbb;
 }
 
 body.dark-mode .close:hover,
 body.dark-mode .close:focus {
-    color: #eee;
-}
-
-body.dark-mode h2 {
-    color: #eee;
-}
-
-body.dark-mode h3 { /* Estilo para h3 no modo noturno */
-    color: #eee;
-}
-
-body.dark-mode textarea {
-    background-color: #444;
-    color: #eee;
-    border-color: #666;
-}
-
-body.dark-mode button,
-body.dark-mode select,
-body.dark-mode input[type="file"] {
-    background-color: #333b4f;
-    color: #eee;
-    border: 1px solid #777;
-}
-
-body.dark-mode button:hover {
-    background: #666;
-}
-
-body.dark-mode input[type="file"] {
-    background-color: #555;
-    color: #eee;
-}
-
-body.dark-mode table {
-    background: #333;
-    color: #eee;
-    border: 2px solid #555;
-}
-
-body.dark-mode th,
-body.dark-mode td {
-    border: 2px solid #555;
-    color: #eee;
-}
-
-/* Estilos para CPF inválido no modo noturno */
-body.dark-mode td.cpf-invalido {
-    background-color: darkred; /* Cor um pouco mais escura para combinar */
-    color: white;
-}
-
-body.dark-mode .email-rapido {
-    background: rgba(0, 0, 0, 0.9);
-    color: #eee;
-}
-
-body.dark-mode input[type="text"] {
-    background-color: #444;
-    color: #eee;
-}
-
-body.dark-mode .notification {
-    background-color: #3a3a3a;
     color: #fff;
 }
 
-/* Botão de Toggle do Modo Noturno */
-#dark-mode-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background-color: #333;
-    color: white;
-    border: none;
-    padding: 0;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 24px;
-    z-index: 1000;
-    transition: background-color 0.3s, color 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
-#dark-mode-toggle:hover {
-    background-color: #333b4f;
-}
-
-/* Loading Spinner */
-.spinner {
-    border: 4px solid rgba(0, 0, 0, 0.1);
-    border-left-color: #fdd835; /* Cor do spinner */
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    animation: spin 1s linear infinite;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 10px;
-    display: none; /* Inicia escondido */
-}
-
-@keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-/* Estilos para a área da câmera */
-#camera-feed {
+#camera-feed, #photo-canvas {
     width: 100%;
-    max-width: 640px;
-    height: auto;
+    max-height: 400px;
+    object-fit: contain; /* Para garantir que a imagem não seja cortada */
     border: 1px solid #ccc;
-    margin-top: 10px;
-    background-color: black;
+    border-radius: 8px;
+    background-color: #000; /* Fundo preto para o feed da câmera */
 }
 
 #camera-controls {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os botões quebrem a linha */
+    justify-content: center;
+    gap: 10px;
     margin-top: 10px;
 }
 
-#photo-canvas {
-    display: none; /* Oculta o canvas inicialmente */
+#dark-mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #ffcc00; /* Yellow for light mode toggle */
+    color: #333;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1001;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-/* --- NOVOS ESTILOS PARA A ÁREA DE EXIBIÇÃO DO OCR --- */
-.ocr-section {
-    background-color: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 25px; /* Espaço do elemento acima */
-    margin-bottom: 25px; /* Espaço do elemento abaixo */
-    text-align: left; /* Alinha o texto à esquerda */
-    transition: background-color 0.5s;
+body.dark-mode #dark-mode-toggle {
+    background-color: #8a2be2; /* Dark purple for dark mode toggle */
+    color: white;
 }
 
-.ocr-section h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    color: gold; /* Destaque para o título */
+/* Botões rápidos - Adicione flex-wrap para melhor responsividade */
+.botoes-rapidos {
+    display: flex;
+    flex-wrap: wrap; /* Adicionado para quebrar linha em telas menores */
+    justify-content: center;
+    gap: 10px; /* Espaçamento entre os elementos */
+    margin: 15px 0;
 }
 
-.ocr-text-output {
-    background-color: #222; /* Fundo escuro para o texto */
-    color: #aaffaa; /* Texto verde claro para legibilidade */
-    padding: 15px;
+.botoes-rapidos select {
+    padding: 10px;
     border-radius: 8px;
-    font-family: 'Courier New', Courier, monospace; /* Fonte monoespaçada */
-    white-space: pre-wrap; /* Mantém a formatação do texto (quebras de linha, espaços) */
-    word-wrap: break-word; /* Quebra palavras longas se necessário */
-    min-height: 80px; /* Altura mínima */
-    overflow-y: auto; /* Adiciona scroll se o texto for muito longo */
-    border: 1px solid #555;
-    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    color: #333;
+    flex-grow: 1; /* Permite que o select cresça */
+    max-width: 200px; /* Limita o tamanho máximo */
 }
 
-body.dark-mode .ocr-section {
-    background-color: rgba(0, 0, 0, 0.85); /* Fundo mais escuro no modo noturno */
+body.dark-mode .botoes-rapidos select {
+    background-color: #3a3a3a;
+    border-color: #555;
+    color: #f4f4f4;
 }
 
-body.dark-mode .ocr-text-output {
-    background-color: #333;
-    color: #90ee90; /* Um verde um pouco diferente no modo noturno */
-    border-color: #777;
+.botoes-rapidos button {
+    flex-shrink: 0; /* Evita que o botão encolha demais */
+}
+
+/* Estilos para o Acordeão (Gavetas) */
+.accordion {
+    background-color: #007bff; /* Mesma cor dos botões principais */
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: background-color 0.4s ease, border-radius 0.4s ease;
+    font-size: 1.2em;
+    border-radius: 8px; /* Cantos arredondados */
+    margin-top: 15px; /* Espaço antes da gaveta */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+body.dark-mode .accordion {
+    background-color: #6a0dad; /* Cor para modo noturno */
+}
+
+.accordion:hover {
+    background-color: #0056b3;
+}
+
+body.dark-mode .accordion:hover {
+    background-color: #4b0082;
+}
+
+.accordion.active {
+    background-color: #0056b3; /* Cor mais escura quando ativo */
+    border-bottom-left-radius: 0; /* Remove arredondamento inferior quando aberto */
+    border-bottom-right-radius: 0;
+}
+
+body.dark-mode .accordion.active {
+    background-color: #4b0082;
 }
 
 
-/* RESPONSIVIDADE PARA CELULARES E TABLETS */
+/* Adiciona um ícone de seta */
+.accordion:after {
+    content: '\25BC'; /* Caractere de seta para baixo */
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+.accordion.active:after {
+    content: '\25B2'; /* Caractere de seta para cima */
+    transform: rotate(180deg); /* Gira para cima */
+}
+
+.panel {
+    padding: 10px 18px; /* Ajuste o padding interno do painel */
+    background-color: white;
+    max-height: 0; /* Começa fechado */
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out; /* Animação suave para altura e padding */
+    border: 1px solid #ddd;
+    border-top: none; /* Remove borda superior para parecer que continua do botão */
+    border-bottom-left-radius: 8px; /* Arredonda apenas as bordas inferiores */
+    border-bottom-right-radius: 8px;
+    margin-bottom: 20px; /* Espaço após o painel fechado */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Sombra sutil para o painel */
+}
+
+body.dark-mode .panel {
+    background-color: #2b2b2b;
+    border-color: #555;
+}
+
+.panel h3 { /* Ajuste o H3 dentro dos painéis para não ter margin-top extra */
+    margin-top: 10px;
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
-    body {
-        padding: 10px;
+    .container {
+        padding: 20px;
     }
 
-    .logo {
-        width: 90%;
-        max-width: 250px;
-    }
-
-    h2 {
-        font-size: 22px;
-        margin-bottom: 10px;
-    }
-
-    h3 { /* Responsividade para h3 */
-        font-size: 20px;
-        margin-top: 15px;
-        margin-bottom: 10px;
-    }
-
-    textarea {
-        width: 100%;
-        height: 180px;
-        font-size: 16px;
-        padding: 10px;
-    }
-
-    button,
-    select,
-    input[type="file"] {
-        width: 100%;
-        padding: 10px;
-        font-size: 16px;
-        margin: 8px 0;
-    }
-
-    input[type="text"] {
-        width: 100% !important;
-        font-size: 16px;
-        padding: 10px;
-    }
-
-    table,
-    th,
-    td {
+    button, input[type="file"], textarea, select {
         font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    h2, h3 {
+        font-size: 1.3em;
+    }
+
+    th, td {
         padding: 8px;
-        word-break: break-word;
+        font-size: 14px;
     }
 
-    input[type="checkbox"] {
-        transform: scale(1.2);
-        margin: 5px;
+    .accordion {
+        font-size: 1em;
+        padding: 15px;
     }
+}
 
-    .info-button {
-        top: 10px;
-        right: 10px;
-        padding: 6px 12px;
-        font-size: 12px;
-    }
-
-    .email-rapido {
-        padding: 10px;
-    }
-
+@media (max-width: 480px) {
     .botoes-rapidos {
-        flex-direction: column;
-        gap: 6px;
+        flex-direction: column; /* Empilha os botões rápidos em telas muito pequenas */
+        align-items: stretch;
     }
 
-    .botoes-rapidos select,
-    .botoes-rapidos button {
-        width: 100%;
-        font-size: 14px;
-        padding: 8px;
-    }
-
-    pre#output-lista,
-    pre#email-gerado {
-        font-size: 13px;
-        white-space: pre-wrap;
-    }
-
-    .modal-content {
-        width: 95%;
-        font-size: 14px;
+    .botoes-rapidos select, .botoes-rapidos button {
+        max-width: 100%; /* Ocupa a largura total */
+        margin: 5px 0; /* Ajusta margem para vertical */
     }
 
     #dark-mode-toggle {
-        top: 10px;
-        right: 10px;
-        padding: 6px;
+        width: 45px;
+        height: 45px;
         font-size: 20px;
-        width: 36px;
-        height: 36px;
+        bottom: 15px;
+        right: 15px;
     }
-
-    /* Responsividade para a área de OCR */
-    .ocr-section {
-        padding: 15px;
-        margin-top: 15px;
-        margin-bottom: 15px;
-    }
-    .ocr-text-output {
-        min-height: 60px; /* Altura mínima responsiva */
-        font-size: 14px;
-        padding: 10px;
-    }
-}
-
-@keyframes bounce {
-    0%,
-    100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-15px);
-    }
-}
-
-.pular {
-    animation: bounce 0.5s ease;
 }
