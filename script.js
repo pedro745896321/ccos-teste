@@ -22,7 +22,7 @@ async function startCamera() {
     const usePhotoButton = document.getElementById('use-photo-button');
     const rotateLeftButton = document.getElementById('rotate-left-button');
     const rotateRightButton = document.getElementById('rotate-right-button');
-    const downloadPhotoButton = document.getElementById('download-photo-button'); // Novo
+    const downloadPhotoButton = document.getElementById('download-photo-button');
 
     try {
         // Solicita acesso à câmera
@@ -35,7 +35,7 @@ async function startCamera() {
         usePhotoButton.style.display = 'none';
         rotateLeftButton.style.display = 'none';
         rotateRightButton.style.display = 'none';
-        downloadPhotoButton.style.display = 'none'; // Esconde na inicialização da câmera
+        downloadPhotoButton.style.display = 'none';
         video.style.display = 'block';
         document.getElementById('photo-canvas').style.display = 'none'; // Garante que o canvas esteja escondido
         rotationAngle = 0; // Reseta o ângulo ao iniciar a câmera
@@ -75,13 +75,16 @@ function takePhoto() {
     document.getElementById('use-photo-button').style.display = 'inline-block';
     document.getElementById('rotate-left-button').style.display = 'inline-block';
     document.getElementById('rotate-right-button').style.display = 'inline-block';
-    document.getElementById('download-photo-button').style.display = 'inline-block'; // NOVO: Mostra botão de download
+    document.getElementById('download-photo-button').style.display = 'inline-block';
 
     // Armazena a imagem como Blob para enviar ao OCR, resetando o ângulo para a foto original
     rotationAngle = 0; // A foto inicial não tem rotação
     photoCanvas.toBlob((blob) => {
         photoTakenBlob = blob;
     }, 'image/jpeg', 0.95); // Qualidade da imagem
+
+    // AQUI É A MUDANÇA: usePhoto() NÃO é mais chamado automaticamente.
+    // O usuário deverá clicar no botão "Usar Foto" para enviar ao OCR.
 }
 
 function retryPhoto() {
@@ -89,7 +92,7 @@ function retryPhoto() {
     resetCameraControls(); // Chama para garantir que tudo esteja no estado inicial
 }
 
-// Nova função para redimensionar a imagem (mantida inalterada, pois já era robusta)
+// Função para redimensionar a imagem
 async function resizeImage(fileBlob, maxWidth = 1200, maxHeight = 1200, quality = 0.8) {
     return new Promise((resolve) => {
         const img = new Image();
@@ -102,7 +105,6 @@ async function resizeImage(fileBlob, maxWidth = 1200, maxHeight = 1200, quality 
                 let width = img.width;
                 let height = img.height;
 
-                // Calculate new dimensions while maintaining aspect ratio
                 if (width > height) {
                     if (width > maxWidth) {
                         height *= maxWidth / width;
@@ -147,7 +149,6 @@ async function drawRotatedImage() {
         let newWidth = originalWidth;
         let newHeight = originalHeight;
 
-        // Se a rotação for 90 ou 270 graus, as dimensões se invertem
         if (rotationAngle === 90 || rotationAngle === 270) {
             newWidth = originalHeight;
             newHeight = originalWidth;
@@ -160,13 +161,10 @@ async function drawRotatedImage() {
 
         context.save(); // Salva o estado atual do canvas
 
-        // Move o ponto de origem para o centro do canvas para rotação
-        context.translate(photoCanvas.width / 2, photoCanvas.height / 2);
+        context.translate(photoCanvas.width / 2, photoCanvas.height / 2); // Move o ponto de origem para o centro
 
-        // Rotaciona (converte graus para radianos)
-        context.rotate(rotationAngle * Math.PI / 180);
+        context.rotate(rotationAngle * Math.PI / 180); // Rotaciona
 
-        // Desenha a imagem centralizada. O ponto (0,0) agora é o centro do canvas
         context.drawImage(img, -originalWidth / 2, -originalHeight / 2, originalWidth, originalHeight);
 
         context.restore(); // Restaura o estado anterior do canvas
@@ -191,7 +189,7 @@ function rotateRight() {
     drawRotatedImage();
 }
 
-// NOVO: Função para iniciar o download da foto
+// Função para iniciar o download da foto
 function downloadPhoto() {
     if (!photoTakenBlob) {
         showNotification("Não há foto para baixar.", true);
@@ -278,7 +276,7 @@ function resetCameraControls() {
     document.getElementById('use-photo-button').style.display = 'none';
     document.getElementById('rotate-left-button').style.display = 'none';
     document.getElementById('rotate-right-button').style.display = 'none';
-    document.getElementById('download-photo-button').style.display = 'none'; // NOVO: Esconde botão de download
+    document.getElementById('download-photo-button').style.display = 'none';
     document.getElementById('camera-feed').style.display = 'block';
     document.getElementById('photo-canvas').style.display = 'none';
     photoTakenBlob = null;
@@ -291,7 +289,7 @@ document.getElementById('retry-photo-button').addEventListener('click', retryPho
 document.getElementById('use-photo-button').addEventListener('click', usePhoto);
 document.getElementById('rotate-left-button').addEventListener('click', rotateLeft);
 document.getElementById('rotate-right-button').addEventListener('click', rotateRight);
-document.getElementById('download-photo-button').addEventListener('click', downloadPhoto); // NOVO: Event Listener para download
+document.getElementById('download-photo-button').addEventListener('click', downloadPhoto);
 
 
 // NOVA FUNÇÃO: Transferir texto do OCR para o textarea de input
