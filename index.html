@@ -14,104 +14,111 @@
     <div class="container">
         <img src="https://i.imgur.com/xtHJbRG.png" alt="Logo" class="logo">
 
-        <h2>1. Extrair Texto de Imagem ou Câmera</h2>
-        <div>
-            <button onclick="openCameraModal()">Tirar Foto (Câmera)</button>
-            <input type="file" id="imagem-upload" accept="image/*" multiple title="Selecione uma ou mais imagens para extrair o texto.">
-            <button onclick="enviarImagemOCR()">Extrair Texto da Imagem <span id="ocr-spinner" class="spinner"></span></button>
+        <button class="accordion">1. Extrair Texto de Imagem ou Câmera</button>
+        <div class="panel">
+            <div>
+                <button onclick="openCameraModal()">Tirar Foto (Câmera)</button>
+                <input type="file" id="imagem-upload" accept="image/*" multiple title="Selecione uma ou mais imagens para extrair o texto.">
+                <button onclick="enviarImagemOCR()">Extrair Texto da Imagem <span id="ocr-spinner" class="spinner"></span></button>
+            </div>
+
+            <div id="ocr-display-area" class="ocr-section">
+                <h3>Texto Extraído da Imagem:</h3>
+                <pre id="display-ocr-text" class="ocr-text-output">Nenhum texto extraído ainda.</pre>
+                <button onclick="copiarTexto(document.getElementById('display-ocr-text').textContent)">Copiar Texto Extraído</button>
+                <button onclick="transferirParaInput()">Usar no Editor Abaixo</button>
+            </div>
         </div>
 
-        <div id="ocr-display-area" class="ocr-section">
-            <h3>Texto Extraído da Imagem:</h3>
-            <pre id="display-ocr-text" class="ocr-text-output">Nenhum texto extraído ainda.</pre>
-            <button onclick="copiarTexto(document.getElementById('display-ocr-text').textContent)">Copiar Texto Extraído</button>
-            <button onclick="transferirParaInput()">Usar no Editor Abaixo</button>
+        <button class="accordion">2. Cole ou Edite o Texto e Gere a Tabela</button>
+        <div class="panel">
+            <textarea id="input-lista" placeholder="O texto da imagem aparecerá aqui ou você pode colar sua lista desorganizada..."></textarea>
+            <button onclick="gerarTabela()" aria-label="Gerar tabela com os dados colados" title="Gerar Tabela">Gerar Tabela</button>
+
+            <div class="botoes-rapidos">
+                <select id="moacir-select">
+                    <option value="MOACIR ANDRADE">MOACIR ANDRADE</option>
+                    <option value="ROBSON BRITO">ROBSON BRITO</option>
+                    <option value="JOSENIAS">JOSENIAS</option>
+                    <option value="LSP">LSP</option>
+                </select>
+                <button onclick="copiarTexto(document.getElementById('moacir-select').value)">Copiar</button>
+
+                <select id="mult-select">
+                    <option value='MULT-PEDRO'>MULT-PEDRO</option>
+                    <option value='GMILL-PEDRO'>GMILL-PEDRO</option>
+                    <option value='AGUIA-PEDRO'>AGUIA-PEDRO</option>
+                    <option value='IDEAL-PEDRO'>IDEAL-PEDRO</option>
+                    <option value='MJM-PEDRO'>MJM-PEDRO</option>
+                    <option value='B11-PEDRO'>B11-PEDRO</option>
+                    <option value='ENTREVISTA-PEDRO'>ENTREVISTA-PEDRO</option>
+                    <option value='GEOLAB-PEDRO'>GEOLAB-PEDRO</option>
+                </select>
+                <button onclick="copiarTexto(document.getElementById('mult-select').value)">Copiar</button>
+
+                <select id="mut-select">
+                    <option value='MULT'>MULT</option>
+                    <option value='AGUIA'>AGUIA</option>
+                    <option value='GMILL'>GMILL</option>
+                    <option value='IDEAL'>IDEAL</option>
+                    <option value='MJM'>MJM</option>
+                    <option value='B11'>B11</option>
+                    <option value='GEOLAB'>GEOLAB</option>
+                </select>
+                <button onclick="copiarTexto(document.getElementById('mut-select').value)">Copiar</button>
+
+                <select id="DIA-select">
+                    <option value='DIARISTA'>DIARISTA</option>
+                    <option value='MOTORISTA'>MOTORISTA</option>
+                    <option value='AJUDANTE'>AJUDANTE</option>
+                    <option value='VISITA'>VISITA</option>
+                    <option value='ENTREVISTA'>ENTREVISTA</option>
+                    <option value='HOMOLOGAÇÃO'>HOMOLOGAÇÃO</option>
+                </select>
+                <button onclick="copiarTexto(document.getElementById('DIA-select').value)">Copiar</button>
+            </div>
+            <input type="text" id="pesquisa" placeholder="🔎 Pesquisar nome..." onkeyup="filtrarTabela()" style="width: 98%; padding: 20px; font-size: 18px; border-radius: 10px; margin: 10px auto 5px auto; display: block;">
+            <p style="font-size: 24px; color: white;">Nomes Restantes: <span id="contador-nomes">0</span></p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feito</th>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>E-mail</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-gerada"></tbody>
+            </table>
+            <h2>Lista Organizada</h2>
+            <pre id="output-lista"></pre>
+            <button onclick="copiarLista()">COPIAR LISTA</button>
         </div>
-        <h2>2. Cole ou Edite o Texto e Gere a Tabela</h2>
-        <textarea id="input-lista" placeholder="O texto da imagem aparecerá aqui ou você pode colar sua lista desorganizada..."></textarea>
-        <button onclick="gerarTabela()" aria-label="Gerar tabela com os dados colados" title="Gerar Tabela">Gerar Tabela</button>
 
-        <div class="botoes-rapidos">
-            <select id="moacir-select">
-                <option value="MOACIR ANDRADE">MOACIR ANDRADE</option>
-                <option value="ROBSON BRITO">ROBSON BRITO</option>
-                <option value="JOSENIAS">JOSENIAS</option>
-                <option value="LSP">LSP</option>
-            </select>
-            <button onclick="copiarTexto(document.getElementById('moacir-select').value)">Copiar</button>
+        <button class="accordion">3. Criar E-mail Rápido</button>
+        <div class="panel">
+            <div class="email-rapido">
+                <label for="horario">Escolha o horário do dia:</label>
+                <select id="horario">
+                    <option value="Bom dia">Bom dia</option>
+                    <option value="Boa tarde">Boa tarde</option>
+                    <option value="Boa noite">Boa noite</option>
+                </select>
 
-            <select id="mult-select">
-                <option value='MULT-PEDRO'>MULT-PEDRO</option>
-                <option value='GMILL-PEDRO'>GMILL-PEDRO</option>
-                <option value='AGUIA-PEDRO'>AGUIA-PEDRO</option>
-                <option value='IDEAL-PEDRO'>IDEAL-PEDRO</option>
-                <option value='MJM-PEDRO'>MJM-PEDRO</option>
-                <option value='B11-PEDRO'>B11-PEDRO</option>
-                <option value='ENTREVISTA-PEDRO'>ENTREVISTA-PEDRO</option>
-                <option value='GEOLAB-PEDRO'>GEOLAB-PEDRO</option>
-            </select>
-            <button onclick="copiarTexto(document.getElementById('mult-select').value)">Copiar</button>
+                <label for="nomes">Nomes (separados por vírgula):</label>
+                <select id="nomes">
+                    <option value="PEDRO HENRIQUE">PEDRO HENRIQUE</option>
+                    <option value="ANDRESSA CAMILLO">ANDRESSA CAMILLO</option>
+                    <option value="WALEX FERREIRA">WALEX FERREIRA</option>
+                    <option value="CARLOS ROBERTO">CARLOS ROBERTO</option>
+                </select>
 
-            <select id="mut-select">
-                <option value='MULT'>MULT</option>
-                <option value='AGUIA'>AGUIA</option>
-                <option value='GMILL'>GMILL</option>
-                <option value='IDEAL'>IDEAL</option>
-                <option value='MJM'>MJM</option>
-                <option value='B11'>B11</option>
-                <option value='GEOLAB'>GEOLAB</option>
-            </select>
-            <button onclick="copiarTexto(document.getElementById('mut-select').value)">Copiar</button>
+                <button onclick="gerarEmail()">Gerar E-mail</button>
+                <button onclick="copiarEmail()">Copiar E-mail</button>
 
-            <select id="DIA-select">
-                <option value='DIARISTA'>DIARISTA</option>
-                <option value='MOTORISTA'>MOTORISTA</option>
-                <option value='AJUDANTE'>AJUDANTE</option>
-                <option value='VISITA'>VISITA</option>
-                <option value='ENTREVISTA'>ENTREVISTA</option>
-                <option value='HOMOLOGAÇÃO'>HOMOLOGAÇÃO</option>
-            </select>
-            <button onclick="copiarTexto(document.getElementById('DIA-select').value)">Copiar</button>
-        </div>
-        <input type="text" id="pesquisa" placeholder="🔎 Pesquisar nome..." onkeyup="filtrarTabela()" style="width: 98%; padding: 20px; font-size: 18px; border-radius: 10px; margin: 10px auto 5px auto; display: block;">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <p style="font-size: 24px; color: white;">Nomes Restantes: <span id="contador-nomes">0</span></p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Feito</th>
-                    <th>Nome</th>
-                    <th>CPF</th>
-                    <th>E-mail</th>
-                </tr>
-            </thead>
-            <tbody id="tabela-gerada"></tbody>
-        </table>
-        <h2>Lista Organizada</h2>
-        <pre id="output-lista"></pre>
-        <button onclick="copiarLista()">COPIAR LISTA</button>
-        <div class="email-rapido">
-            <h2>📧 Criar E-mail Rápido</h2>
-            <label for="horario">Escolha o horário do dia:</label>
-            <select id="horario">
-                <option value="Bom dia">Bom dia</option>
-                <option value="Boa tarde">Boa tarde</option>
-                <option value="Boa noite">Boa noite</option>
-            </select>
-
-            <label for="nomes">Nomes (separados por vírgula):</label>
-            <select id="nomes">
-                <option value="PEDRO HENRIQUE">PEDRO HENRIQUE</option>
-                <option value="ANDRESSA CAMILLO">ANDRESSA CAMILLO</option>
-                <option value="WALEX FERREIRA">WALEX FERREIRA</option>
-                <option value="CARLOS ROBERTO">CARLOS ROBERTO</option>
-            </select>
-
-            <button onclick="gerarEmail()">Gerar E-mail</button>
-            <button onclick="copiarEmail()">Copiar E-mail</button>
-
-            <h3>E-mail Gerado:</h3>
-            <pre id="email-gerado" style="white-space: pre-wrap;"></pre>
+                <h3>E-mail Gerado:</h3>
+                <pre id="email-gerado" style="white-space: pre-wrap;"></pre>
+            </div>
         </div>
 
         <div id="copy-notification" class="notification" aria-live="polite"></div>
